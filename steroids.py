@@ -12,7 +12,7 @@ import imp
 
 
 parser = argparse.ArgumentParser(description="Python Flask with Steroids")
-parser.add_argument('action', help="Action to perform", choices=["init", "run", "upgrade"])
+parser.add_argument('action', help="Action to perform", choices=["init"])
 parser.add_argument('name', help="Project name")
 
 parser.add_argument('--modules', '-m', nargs="*", default=["flask","mongodb","tornado","honcho"], help="Modules to use")
@@ -24,7 +24,6 @@ arguments = parser.parse_args()
 # Variables:
 PROJECT_NAME = arguments.name
 PROJECT_ABS_PATH = os.path.join(arguments.basepath,PROJECT_NAME)
-PROJECT_PORT = arguments.port[0]
 PROJECT_MODULES = list()
 
 if arguments.modules:
