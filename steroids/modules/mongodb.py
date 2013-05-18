@@ -21,7 +21,7 @@ files = [
 
 def install(basepath, name):
     """
-        Install Flask Module
+        Install MongoDB Module
     """
     
     objectMaster_file = open(os.path.join(basepath,"%s/objects/Master.py" % name), "w")
@@ -87,7 +87,7 @@ class Master(object):
     
 def install_examples(basepath, name):
     """
-        Install Flask Module
+        Install MongoDB Module examples
     """
     
     example_file = open(os.path.join(basepath,"%s/objects/Example.py" % name), "w")
