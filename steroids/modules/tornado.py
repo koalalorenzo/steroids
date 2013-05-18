@@ -1,9 +1,5 @@
 import os
 
-dependencies = [
-    "flask"
-    ]
-    
 requirements = [
     "tornado"
 ]
