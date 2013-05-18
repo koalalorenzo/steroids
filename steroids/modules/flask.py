@@ -1,3 +1,10 @@
+#!/usr/bin/python
+# -*- coding=utf-8 -*-
+
+import os
+import string
+import random
+
 requirements = [
     "flask"
 ]
@@ -10,6 +17,7 @@ directories = [
 ]
 
 files = [
+    "[base]/configuration.py",
     "[base]/server.py",
     "[base]/[name]/__init__.py",
     "[base]/[name]/constants.py",
@@ -51,6 +59,27 @@ def serve_static(afilepath):
 # Import Views here:
 # Ex: import %s.views.ViewName
 """ % (name, name))
+
+    random_value = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
+    config_file = open(os.path.join(basepath,"configuration.py"), "a")
+    config_file.write("""# -*- coding=utf-8 -*-
+    
+    # Flask Config
+    FLASK_SECRET_KEY = "%s"
+    SERVER_PORT = 8080
+    SERVER_HOST = "0.0.0.0"
+    FLASK_DEBUG = True
+    """ % random_value)
+    
+    server_file = open(os.path.join(basepath,"server.py"), "w")
+    server_file.write("""
+from %s import app
+from configuration import FLASK_DEBUG, SERVER_PORT
+
+app.debug = FLASK_DEBUG
+if __name__ == "__main__":
+    app.run(host=SERVER_HOST, port=SERVER_PORT)""")
+    
     
     return
     
@@ -87,10 +116,10 @@ def homeExample_homepage():
     example_template_layout_file = open(os.path.join(basepath,"%s/templates/layout.html" % name), "w")
     example_template_layout_file.write("""<html><head><title>Steroids</title></head><body>
 <hr>
-{% block container %}
-{% endblock %}
+{%% block container %%}
+{%% endblock %%}
 <hr>
-%s is powered by <a href="http://setale.me/Steroids">Steroids</a>!
+%s is powered by <a href="http://projects.setale.me/Steroids">Steroids</a>
 </body></html>""" % name)
     example_template_layout_file.close()   
     
@@ -105,7 +134,7 @@ def homeExample_homepage():
 This is an example!
 {% endblock %}
 
-""" % (name, name, name))
+""")
     example_template_file.close()   
     
     return
