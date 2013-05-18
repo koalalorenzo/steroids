@@ -8,7 +8,10 @@ In other words: Python Flask with Steroids
 *not ready*
 
 ##Quick Use
-*not ready*
+To generate a new project with examples use this command:
+
+    steroids init ProjectName --examples=True
+
 
 ## Structure
 The structure of a Project built on Steroids is derived from Flask one. It provides Objects, Statics file, Views, Templates, Custom Decorators and others.
