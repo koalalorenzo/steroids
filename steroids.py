@@ -36,12 +36,6 @@ if arguments.modules:
         else:
             sys.stderr.write("\nW: 404 module not found: %s\n" % module)
 
-sys.stderr.write("Using:\n")
-print PROJECT_NAME
-print PROJECT_ABS_PATH
-print PROJECT_PORT
-print PROJECT_MODULES
-
 if arguments.action == "init":
     from steroids.installation import *
     
