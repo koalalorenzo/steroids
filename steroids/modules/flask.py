@@ -64,21 +64,22 @@ def serve_static(afilepath):
     config_file = open(os.path.join(basepath,"configuration.py"), "a")
     config_file.write("""# -*- coding=utf-8 -*-
     
-    # Flask Config
-    FLASK_SECRET_KEY = "%s"
-    SERVER_PORT = 8080
-    SERVER_HOST = "0.0.0.0"
-    FLASK_DEBUG = True
-    """ % random_value)
+# Flask Config
+FLASK_SECRET_KEY = "%s"
+SERVER_PORT = 8080
+SERVER_HOST = "0.0.0.0"
+FLASK_DEBUG = True
+""" % random_value)
     
     server_file = open(os.path.join(basepath,"server.py"), "w")
     server_file.write("""
 from %s import app
-from configuration import FLASK_DEBUG, SERVER_PORT
+from configuration import FLASK_DEBUG, SERVER_PORT, SERVER_HOST
 
 app.debug = FLASK_DEBUG
 if __name__ == "__main__":
-    app.run(host=SERVER_HOST, port=SERVER_PORT)""")
+    app.run(host=SERVER_HOST, port=SERVER_PORT)
+""" % name)
     
     
     return
@@ -89,7 +90,7 @@ def install_examples(basepath, name):
     """
     
     init_file = open(os.path.join(basepath,"%s/__init__.py" % name), "a")
-    init_file.write("\nimport %s.views.homeExample\n")
+    init_file.write("\nimport %s.views.homeExample\n" % name)
     init_file.close()
     
     example_file = open(os.path.join(basepath,"%s/views/homeExample.py" % name), "w")
@@ -97,7 +98,7 @@ def install_examples(basepath, name):
 # -*- coding=utf-8 -*-
 from %s import app
 from %s.decorators import *
-from %s.conventions import *
+from %s.constants import *
 
 from flask import render_template
 from flask import url_for
