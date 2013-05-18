@@ -16,13 +16,12 @@ parser.add_argument('action', help="Action to perform", choices=["init", "run", 
 parser.add_argument('name', help="Project name")
 
 parser.add_argument('--modules', '-m', nargs="*", default=["flask","mongodb","tornado","honcho"], help="Modules to use")
-parser.add_argument('--port', '-p', nargs=1, default=[8080], help="Default http port to use")
-parser.add_argument('--basepath', '-b', nargs=1, default=os.getcwd(), type=str, help="Default base path to use")
+parser.add_argument('--basepath', '-b', nargs=1, default=os.getcwd(), type=str, help="Path to use")
 parser.add_argument('--examples', '-e', nargs=1, default=False, type=bool, help="Install examples")
 
 arguments = parser.parse_args()
     
-# Variables:    
+# Variables:
 PROJECT_NAME = arguments.name
 PROJECT_ABS_PATH = os.path.join(arguments.basepath,PROJECT_NAME)
 PROJECT_PORT = arguments.port[0]
