@@ -1,6 +1,6 @@
 #Steroids
 ## 
-**Steroids** provides a set of scripts to **help developers** to build their **real-time ready**, **non-blocking**, **python web application**.
+**Steroids** provides a set of scripts to **help developers** to build their **real-time ready**, **non-blocking**, **python web application** reducing efforts and time.
 
 ##Install and use it
 The project is not ready for installation…
@@ -8,6 +8,7 @@ The project is not ready for installation…
 ## Structure
 The structure of a Project built on Steroids is derived from Flask one. It provides Objects, Statics file, Views, Templates, Custom Decorators and others.
 
+*insert tree here*
 
 This structure give a lot of freedom to developers: they can modify it without problems. Steroids structure is just an ordered way to create web services in python.
 
