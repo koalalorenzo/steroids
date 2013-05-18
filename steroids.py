@@ -12,15 +12,15 @@ import imp
 
 
 parser = argparse.ArgumentParser(description="Python Flask with Steroids")
-parser.add_argument('action', help="Action to perform", choices=["init", "run"])
+parser.add_argument('action', help="Action to perform", choices=["init", "run", "upgrade"])
 parser.add_argument('name', help="Project name")
 
-parser.add_argument('--modules', '-m', nargs="*", default=["mongodb","tornado","honcho"], help="Modules to use")
+parser.add_argument('--modules', '-m', nargs="*", default=["flask","mongodb","tornado","honcho"], help="Modules to use")
 parser.add_argument('--port', '-p', nargs=1, default=[8080], help="Default http port to use")
 parser.add_argument('--basepath', '-b', nargs=1, default=os.getcwd(), type=str, help="Default base path to use")
+parser.add_argument('--examples', '-e', nargs=1, default=False, type=bool, help="Install examples")
 
 arguments = parser.parse_args()
-    
     
 # Variables:    
 PROJECT_NAME = arguments.name
@@ -34,16 +34,33 @@ if arguments.modules:
         if module in modules_available:
             PROJECT_MODULES.append(module)
         else:
-            sys.stderr.write("\nW: 404 module not found: %s\n" % module)    
+            sys.stderr.write("\nW: 404 module not found: %s\n" % module)
 
-sys.stderr.write("Using:\n")    
+sys.stderr.write("Using:\n")
 print PROJECT_NAME
 print PROJECT_ABS_PATH
 print PROJECT_PORT
 print PROJECT_MODULES
 
 if arguments.action == "init":
+    from steroids.installation import *
+    
     if not os.path.exists(PROJECT_ABS_PATH):
         os.mkdir(PROJECT_ABS_PATH)
+    
+    sys.stderr.write("Installing Modules:\n")
+    
+    all_requirementes = list()
+    for module_name in PROJECT_MODULES:
+        module = __import__("steroids.modules.%s" % module_name, globals(), locals(), [module_name], -1)
+        sys.stderr.write(" - Installing %s\n" % module_name)
+        install_module(module, PROJECT_ABS_PATH, PROJECT_NAME, examples=arguments.examples)
+        all_requirementes = all_requirementes + list(set(module.requirements) - set(all_requirementes))
+    
+    sys.stderr.write("Creating requirements: ")
+    requirements_file = open(os.path.join(PROJECT_ABS_PATH,"requirements.txt"), "w")
+    requirements_file.write("\n".join(all_requirementes))
+    requirements_file.close()
+    sys.stderr.write("done\n")
     
     
