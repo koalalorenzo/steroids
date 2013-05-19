@@ -42,7 +42,7 @@ fi
 
 rm -rf "$INSTALL_TMPDIR"
 mkdir "$INSTALL_TMPDIR"
-curl --progress-bar --fail "" | tar -xzf - -C "$INSTALL_TMPDIR"
+curl --progress-bar --fail "$TARBALL_URL" | tar -xzf - -C "$INSTALL_TMPDIR"
 cd "$INSTALL_TMPDIR"
 
 # Using 2.7 to support ArchLinux and other OS that use python 3 too.
