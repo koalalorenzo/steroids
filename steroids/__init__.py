@@ -1,4 +1,4 @@
-"""Steroids: tools to help developers to build real-time ready, non-blocking, python web application reducing efforts and time."""
+"""Steroids is a set of tools to help python developers to build real-time ready, non-blocking, web application reducing efforts and time."""
 
 __version__ = "0.4.1"
 __author__ = "Lorenzo Setale ( http://who.is.lorenzo.setale.me/? )"
