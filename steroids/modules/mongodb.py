@@ -3,10 +3,9 @@
 
 import os
 
-__help__ = """ MongoDB (from "humongous") is an open-source document database, and the leading NoSQL database, written in C++.
+__help__ = """MongoDB (from "humongous") is an open-source document database, and the leading NoSQL database, written in C++.
 
-This module provide integration with pymongo to save objects inside a MongoDB instance. 
-"""
+This module provide integration with pymongo to save objects inside a MongoDB instance."""
 
 
 requirements = [
