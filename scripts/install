@@ -1,5 +1,8 @@
 #!/bin/bash
 
+die() { echo >&2 -e "\nERROR: $@\n"; exit 1; }
+run() { $*; code=$?; [ $code -ne 0 ] && die "command [$*] failed with error code $code"; }
+
 TARBALL_URL="http://projects.setale.me/Steroids/latest.tar.gz"
 INSTALL_TMPDIR="$HOME/.tmpsteroids"
 
@@ -20,42 +23,42 @@ if [ $EXISTS -eq 0 ]; then
     if [ -f  /usr/bin/apt-get ]; then
         read -p "A: python-pip not installed. Would you like to install via apt-get?" yn
         case $yn in
-            [Yy]* ) sudo apt-get install beep python-pip python-dev; break;;
+            [Yy]* ) run sudo apt-get install beep python-pip python-dev; break;;
             * ) exit;;
         esac
         
     elif [ -f  /usr/bin/pacman ]; then
         read -p "A: python-pip not installed. Would you like to install via pacman?" yn
         case $yn in
-            [Yy]* ) sudo pacman -S beep python2-pip; break;;
+            [Yy]* ) run sudo pacman -S beep python2-pip; break;;
             * ) exit;;
         esac    
 
     elif [ -f  /usr/bin/easy_install-2.7 ]; then
         read -p "A: python-pip not installed. Would you like to install via easy_install?" yn
         case $yn in
-            [Yy]* ) sudo easy_install-2.7 pip; break;;
+            [Yy]* ) run sudo easy_install-2.7 pip; break;;
             * ) exit;;
         esac
     fi
 fi
 
-rm -rf "$INSTALL_TMPDIR"
-mkdir "$INSTALL_TMPDIR"
+run rm -rf "$INSTALL_TMPDIR"
+run mkdir "$INSTALL_TMPDIR"
 echo "Downloading the latest version... "
-curl --progress-bar --fail "$TARBALL_URL" | tar -xzf - -C "$INSTALL_TMPDIR"
+run curl --progress-bar --fail "$TARBALL_URL" | tar -xzf - -C "$INSTALL_TMPDIR"
 cd "$INSTALL_TMPDIR"
 
 # Using 2.7 to support ArchLinux and other OS that use python 3 too.
 echo "Installing requirements... "
-sudo pip-2.7 install -U -r requirements.txt
+run sudo pip-2.7 install -U -r requirements.txt
 echo "Installing Steroids... "
-sudo python2.7 setup.py install
+run sudo python2.7 setup.py install
 
 if [ -f /usr/bin/beep ]; then
-    beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
+    run sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
 fi
 
-sudo rm -rf "$INSTALL_TMPDIR"
+run sudo rm -rf "$INSTALL_TMPDIR"
 
 echo "Steroid installed Correctly"
