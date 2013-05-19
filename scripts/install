@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 TARBALL_URL="http://projects.setale.me/Steroids/latest.tar.gz"
 INSTALL_TMPDIR="$HOME/.tmpsteroids"
@@ -46,8 +46,8 @@ curl --progress-bar --fail "$TARBALL_URL" | tar -xzf - -C "$INSTALL_TMPDIR"
 cd "$INSTALL_TMPDIR"
 
 # Using 2.7 to support ArchLinux and other OS that use python 3 too.
-exec sudo pip-2.7 install -U -r requirements.txt
-exec sudo python2.7 setup.py install
+sudo pip-2.7 install -U -r requirements.txt
+sudo python2.7 setup.py install
 
 rm -rf "$INSTALL_TMPDIR"
 
