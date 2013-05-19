@@ -14,5 +14,5 @@ setup(name='steroids',
       author_email='koalalorenzo@gmail.com',
       url='https://github.com/koalalorenzo/Steroids',
       packages=['steroids'],
-      scripts=['bin/steroids']
+      scripts=['scripts/steroids']
      )
