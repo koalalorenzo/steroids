@@ -8,6 +8,6 @@ setup(name='steroids',
       author='Lorenzo Setale ( http://who.is.lorenzo.setale.me/? )',
       author_email='koalalorenzo@gmail.com',
       url='https://github.com/koalalorenzo/Steroids',
-      packages=['steroids'],
+      packages=['steroids', 'steroids.modules'],
       scripts=['scripts/steroids']
      )
