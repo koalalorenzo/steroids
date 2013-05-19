@@ -21,9 +21,29 @@ If you need help you can use:
 ## Structure
 The structure of a Project built on Steroids is derived from Flask one. It provides Objects, Statics file, Views, Templates, Custom Decorators and others.
 
-*insert tree here*
+The following structure is based on the default modules used: Flask, MongoDB, Tornado and Honcho.
 
-This structure give a lot of freedom to developers: they can modify it without problems. Steroids structure is just an ordered way to create web services in python.
+    ./configuration.py          # Configuration File
+    ./server.py                 # script to start Server
+    ./tornado.py                # script to start Tornado Server
+    ./clock.py                  # script to start the Scheduler
+    ./Procfile                  # Foreman/Honcho file
+    ./requirements.txt          # python requirements
+    ./project/                  # Where the magic happens
+             /__init__.py       # Server declarations 
+             /conventions.py    # Generic conventions
+             /database.py       # Database conventions
+             /decorators.py     # Common decorators 
+             /views/            # Directory of Views
+             /templates/        # Directory of Templates
+             /static/           # Directory of static files
+             /objects/          # Directory of Objects
+                     /Master.py # Objects should be derived from Master
+               
+
+This structure give a lot of freedom to developers: they can modify it without problems adapting the structure in base of what they do. Steroids structure is just an ordered way to create web services in python.
+
+To **understand the structure** is suggested to enable the **examples** when initalizing a project.
 
 ## Modules
 These are the current modules available
