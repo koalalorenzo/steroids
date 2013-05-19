@@ -5,6 +5,9 @@ import os
 import string
 import random
 
+__help__ = """ Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions. """
+
+
 requirements = [
     "flask"
 ]

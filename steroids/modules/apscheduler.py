@@ -1,5 +1,8 @@
 import os
 
+__help__ = """
+"""
+
 requirements = [
     "apscheduler"
 ]
