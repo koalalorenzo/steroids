@@ -33,13 +33,17 @@ if arguments.action == "init":
             if module in modules_available:
                 PROJECT_MODULES.append(module)
             else:
-                sys.stderr.write("\nW: 404 module not found: %s\n" % module)
-
+                sys.stderr.write("\n**W: 404 module not found: %s**\n" % module)
+                
+                
+    if len(PROJECT_MODULES) == 0:
+        raise Exception("Using 0 modules!")
+    
     ## Steroids is useful not only for web projects:
     #if not "flask" in PROJECT_MODULES:
     #    sys.stderr.write("\nW: Flask module not selected: added\n")
     #    PROJECT_MODULES.insert(0, "flask")
-
+    
     from steroids.installation import *
     
     if not os.path.exists(PROJECT_ABS_PATH):
@@ -47,7 +51,7 @@ if arguments.action == "init":
     else:
         raise Exception("Directory already exists: %s" % PROJECT_ABS_PATH)
         
-    sys.stderr.write("Installing Modules:\n")
+    sys.stderr.write("## Installing Modules:\n")
     
     all_requirementes = list()
     for module_name in PROJECT_MODULES:
@@ -56,29 +60,34 @@ if arguments.action == "init":
         install_module(module, PROJECT_ABS_PATH, PROJECT_NAME, examples=arguments.examples)
         all_requirementes = all_requirementes + list(set(module.requirements) - set(all_requirementes))
     
-    sys.stderr.write("Creating requirements: ")
+    sys.stderr.write("## Creating requirements... ")
     requirements_file = open(os.path.join(PROJECT_ABS_PATH,"requirements.txt"), "w")
     requirements_file.write("\n".join(all_requirementes))
     requirements_file.close()
-    sys.stderr.write("done\n") 
+    sys.stderr.write("# %s initialized correctly! Have nice coding\n") 
 
 ### Modules part ### 
 elif arguments.action == "modules":
     if arguments.name == "list":
-        sys.stderr.write("Steroids modules available: \n")
+        sys.stderr.write("# Steroids modules available: \n")
         for module_name in dir(steroids.modules):
             if module_name[0] == "_": continue
             sys.stderr.write(" - %s\n" % module_name)
+        sys.stderr.write("\n")
         sys.stderr.write("Use -m option to use what you need\n")
         sys.stderr.write("By default Steroids uses flask, mongodb, tornado and honcho modules\n")
         
     elif arguments.name in dir(steroids.modules):
         module_name = arguments.name
         module = __import__("steroids.modules.%s" % module_name, globals(), locals(), [module_name], -1)
-        sys.stderr.write("Steroid module %s description:\n" % module_name)
+        sys.stderr.write("# Steroid module %s description:\n" % module_name)
+        sys.stderr.write("\n")
         sys.stderr.write(module.__help__)
-        sys.stderr.write("\nUse this command to use this module: \n")
-        sys.stderr.write("    steroids init ProjectName -m %s ..." % module_name)
+        sys.stderr.write("\n")
+        sys.stderr.write("\n")
+        sys.stderr.write("# How to use %s\n" % module_name)
+        sys.stderr.write("Use this command to use this module: \n")
+        sys.stderr.write("    steroids init ProjectName -m %s ...\n" % module_name)
         
         
     
