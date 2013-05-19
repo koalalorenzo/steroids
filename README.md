@@ -7,7 +7,11 @@ If you are using Unix-like OS, to install Steroids use this command, right from 
 
     curl http://projects.setale.me/Steroids/install | bash
 
-In case the machine some requirements, the script will do it for you.
+In case the machine some requirements, the script will do it for you. 
+
+Alternatively You can also install Steroids via PIP:
+
+    pip install Steroids
 
 ##Quick Use
 To generate a new project with examples use this command:
