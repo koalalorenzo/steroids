@@ -9,7 +9,7 @@ If you are using Unix-like OS, to install Steroids use this command, right from 
 
 In case the machine some requirements, the script will do it for you. 
 
-Alternatively You can also install Steroids via PIP:
+Alternatively You can also install Steroids via *python pip* command:
 
     pip install Steroids
 
