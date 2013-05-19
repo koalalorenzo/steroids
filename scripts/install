@@ -1,0 +1,53 @@
+#!/bin/bash
+
+TARBALL_URL="http://projects.setale.me/Steroids/latest.tar.gz"
+INSTALL_TMPDIR="$HOME/.tmpsteroids"
+
+UNAME=$(uname)
+
+if [ "$UNAME" != "Linux" -a "$UNAME" != "Darwin" ] ; 
+then
+    echo "Your OS is not supported! This script works on Linux, MacOS or OS X"
+    exit 1
+fi
+
+if [ ! -f  /usr/bin/pip ]; then
+    if [ -f  /usr/bin/apt-get ]; then
+        while true; do
+            read -p "A: python-pip not installed. Would you like to install via apt-get?" yn
+            case $yn in
+                [Yy]* ) sudo apt-get install python-pip python-dev; break;;
+                [Nn]* ) exit;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+
+    elif [ -f  /usr/bin/pacman ]; then
+        while true; do
+            read -p "A: python-pip not installed. Would you like to install via pacman?" yn
+            case $yn in
+                [Yy]* ) sudo pacman -S python2-pip python-pip; break;;
+                [Nn]* ) exit;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+        
+    elif [ -f  /usr/bin/easy_install ]; then
+        while true; do
+            read -p "A: python-pip not installed. Would you like to install via easy_install?" yn
+            case $yn in
+                [Yy]* ) sudo easy_install pip; break;;
+                [Nn]* ) exit;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+    fi
+fi
+
+rm -rf "$INSTALL_TMPDIR"
+mkdir "$INSTALL_TMPDIR"
+curl --progress-bar --fail "" | tar -xzf - -C "$INSTALL_TMPDIR"
+cd "$INSTALL_TMPDIR"
+exec sudo pip install -U -r requirements.txt
+exec sudo python setup.py install
+rm -rf "$INSTALL_TMPDIR"
