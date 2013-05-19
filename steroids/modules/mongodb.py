@@ -97,7 +97,7 @@ MONGO_PASSWORD = "password"
 """ % name)
     config_file.close()
 
-    database_file = open(os.path.join(basepath,"%s/database.py"), "w")
+    database_file = open(os.path.join(basepath,"%s/database.py" % name), "w")
     database_file.write("""from pymongo import Connection
 from configuration import *
 
