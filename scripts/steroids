@@ -27,6 +27,7 @@ if arguments.action == "init":
     PROJECT_ABS_PATH = os.path.join(arguments.basepath,PROJECT_NAME)
     PROJECT_MODULES = list()
     
+    sys.stderr.write("# Initializing %s " % PROJECT_NAME)
     if arguments.modules:
         modules_available = dir(steroids.modules)
         for module in arguments.modules:
@@ -60,11 +61,11 @@ if arguments.action == "init":
         install_module(module, PROJECT_ABS_PATH, PROJECT_NAME, examples=arguments.examples)
         all_requirementes = all_requirementes + list(set(module.requirements) - set(all_requirementes))
     
-    sys.stderr.write("## Creating requirements... ")
+    sys.stderr.write("## Creating requirements... \n")
     requirements_file = open(os.path.join(PROJECT_ABS_PATH,"requirements.txt"), "w")
     requirements_file.write("\n".join(all_requirementes))
     requirements_file.close()
-    sys.stderr.write("# %s initialized correctly! Have nice coding\n") 
+    sys.stderr.write("# %s initialized correctly!\nHave nice coding :)\n" % PROJECT_NAME) 
 
 ### Modules part ### 
 elif arguments.action == "modules":
