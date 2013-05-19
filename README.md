@@ -35,7 +35,7 @@ The following structure is based on the default modules used: Flask, MongoDB, To
              /database.py       # Database conventions
              /decorators.py     # Common decorators 
              /views/            # Directory of Views
-             /templates/        # Directory of Templates
+             /templates/        # Directory of Templates and HTML files
              /static/           # Directory of static files
              /objects/          # Directory of Objects
                      /Master.py # Objects should be derived from Master
