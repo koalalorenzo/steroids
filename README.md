@@ -1,6 +1,6 @@
 #Steroids
 ## 
-**Steroids** is a set of tools to **help developers** to build **real-time ready**, **non-blocking**, **python web application** reducing efforts and time.
+**Steroids** is a set of tools to **help python developers** to build **real-time ready**, **non-blocking**, **web application** reducing efforts and time.
 
 ##Quick install
 If you are using Unix-like OS, to install Steroids use this command, right from your terminal:
@@ -28,7 +28,7 @@ The following structure is based on the default modules used: Flask, MongoDB, To
     ./tornado.py                # script to start Tornado Server
     ./clock.py                  # script to start the Scheduler
     ./Procfile                  # Foreman/Honcho file
-    ./requirements.txt          # python requirements
+    ./requirements.txt          # python packages required
     ./project/                  # Where the magic happens
              /__init__.py       # Server declarations 
              /conventions.py    # Generic conventions
