@@ -6,6 +6,7 @@ requirements = [
 
 directories = [
     "[base]",
+    "[base]/[name]",
     ]
 
 files = [
