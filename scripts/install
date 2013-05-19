@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 TARBALL_URL="http://projects.setale.me/Steroids/latest.tar.gz"
 INSTALL_TMPDIR="$HOME/.tmpsteroids"
@@ -11,36 +11,32 @@ then
     exit 1
 fi
 
-if [ ! -f  /usr/bin/pip ]; then
-    if [ -f  /usr/bin/apt-get ]; then
-        while true; do
-            read -p "A: python-pip not installed. Would you like to install via apt-get?" yn
-            case $yn in
-                [Yy]* ) sudo apt-get install python-pip python-dev; break;;
-                [Nn]* ) exit;;
-                * ) echo "Please answer yes or no.";;
-            esac
-        done
+# Using 2.7 to support ArchLinux and other OS that use python 3 too.
+EXISTS=0
+if [ -f /usr/bin/pip-2.7 ]; then EXISTS=1; fi;
+if [ -f /usr/local/bin/pip-2.7 ]; then EXISTS=1; fi;
 
-    elif [ -f  /usr/bin/pacman ]; then
-        while true; do
-            read -p "A: python-pip not installed. Would you like to install via pacman?" yn
-            case $yn in
-                [Yy]* ) sudo pacman -S python2-pip python-pip; break;;
-                [Nn]* ) exit;;
-                * ) echo "Please answer yes or no.";;
-            esac
-        done
+if [ $EXISTS -eq 0 ]; then
+    if [ -f  /usr/bin/apt-get ]; then
+        read -p "A: python-pip not installed. Would you like to install via apt-get?" yn
+        case $yn in
+            [Yy]* ) sudo apt-get install python-pip python-dev; break;;
+            * ) exit;;
+        esac
         
-    elif [ -f  /usr/bin/easy_install ]; then
-        while true; do
-            read -p "A: python-pip not installed. Would you like to install via easy_install?" yn
-            case $yn in
-                [Yy]* ) sudo easy_install pip; break;;
-                [Nn]* ) exit;;
-                * ) echo "Please answer yes or no.";;
-            esac
-        done
+    elif [ -f  /usr/bin/pacman ]; then
+        read -p "A: python-pip not installed. Would you like to install via pacman?" yn
+        case $yn in
+            [Yy]* ) sudo pacman -S python2-pip; break;;
+            * ) exit;;
+        esac    
+
+    elif [ -f  /usr/bin/easy_install-2.7 ]; then
+        read -p "A: python-pip not installed. Would you like to install via easy_install?" yn
+        case $yn in
+            [Yy]* ) sudo easy_install-2.7 pip; break;;
+            * ) exit;;
+        esac
     fi
 fi
 
@@ -48,6 +44,11 @@ rm -rf "$INSTALL_TMPDIR"
 mkdir "$INSTALL_TMPDIR"
 curl --progress-bar --fail "" | tar -xzf - -C "$INSTALL_TMPDIR"
 cd "$INSTALL_TMPDIR"
-exec sudo pip install -U -r requirements.txt
-exec sudo python setup.py install
+
+# Using 2.7 to support ArchLinux and other OS that use python 3 too.
+exec sudo pip-2.7 install -U -r requirements.txt
+exec sudo python2.7 setup.py install
+
 rm -rf "$INSTALL_TMPDIR"
+
+read -s -r -p "Steroids installed... Press any key to continue..." -n 1 dummy
