@@ -85,7 +85,7 @@ class Master(object):
         return output""" % name )
     objectMaster_file.close()
 
-    config_file = open(os.path.join(basepath,"configurations.py"), "a")
+    config_file = open(os.path.join(basepath,"configuration.py"), "a")
     config_file.write("""#MongoDB Configuration
 MONGO_HOST = "127.0.0.1"
 MONGO_PORT = 27017
