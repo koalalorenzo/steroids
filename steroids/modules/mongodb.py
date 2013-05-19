@@ -13,8 +13,9 @@ directories = [
 ]
 
 files = [
+    "[base]/configuration.py",
     "[base]/[name]/__init__.py",
-    "[base]/[name]/constants.py",
+    "[base]/[name]/database.py",
     "[base]/[name]/objects/__init__.py",
     "[base]/[name]/objects/Master.py",
 ]
@@ -29,11 +30,12 @@ def install(basepath, name):
 # -*- coding=utf-8 -*-
 
 from pymongo.objectid import ObjectId
+from %s.database import db
 
 class Master(object):
     def __init__(self):
         self.id = ObjectId()
-        self.database = None
+        self.database = db
         self.collection = str()
         
     def save(self):
@@ -80,9 +82,31 @@ class Master(object):
         if not json:
             output['_id'] = str(self.id)
         
-        return output""")
+        return output""" % name )
     objectMaster_file.close()
+
+    config_file = open(os.path.join(basepath,"configurations.py"), "a")
+    config_file.write("""#MongoDB Configuration
+MONGO_HOST = "127.0.0.1"
+MONGO_PORT = 27017
+MONGO_DB = "%s" 
+
+MONGO_USERNAME = "username"
+MONGO_PASSWORD = "password"
     
+""" % name)
+    config_file.close()
+
+    database_file = open(os.path.join(basepath,"%s/database.py"), "w")
+    database_file.write("""from pymongo import Connection
+from configuration import *
+
+db_connection =  Connection(MONGO_HOST, MONGO_PORT)
+db = db_connection[MONGO_DB]
+db.authenticate(MONGO_USERNAME,MONGO_PASSWORD)
+""")
+    database_file.close()
+
     return
     
 def install_examples(basepath, name):
