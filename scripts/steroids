@@ -12,7 +12,7 @@ import imp
 
 
 parser = argparse.ArgumentParser(description="Python Flask with Steroids")
-parser.add_argument('action', help="Action to perform", choices=["init","run"])
+parser.add_argument('action', help="Action to perform", choices=["init","modules"])
 parser.add_argument('name', help="Project name")
 
 parser.add_argument('--modules', '-m', nargs="*", default=["flask","mongodb","tornado","honcho"], help="Modules to use")
@@ -20,21 +20,26 @@ parser.add_argument('--basepath', '-b', nargs=1, default=os.getcwd(), type=str, 
 parser.add_argument('--examples', '-e', nargs=1, default=False, type=bool, help="Install examples?")
 
 arguments = parser.parse_args()
-    
-# Variables:
-PROJECT_NAME = arguments.name
-PROJECT_ABS_PATH = os.path.join(arguments.basepath,PROJECT_NAME)
-PROJECT_MODULES = list()
 
-if arguments.modules:
-    modules_available = dir(steroids.modules)
-    for module in arguments.modules:
-        if module in modules_available:
-            PROJECT_MODULES.append(module)
-        else:
-            sys.stderr.write("\nW: 404 module not found: %s\n" % module)
-
+### Init part ###
 if arguments.action == "init":
+    PROJECT_NAME = arguments.name
+    PROJECT_ABS_PATH = os.path.join(arguments.basepath,PROJECT_NAME)
+    PROJECT_MODULES = list()
+    
+    if arguments.modules:
+        modules_available = dir(steroids.modules)
+        for module in arguments.modules:
+            if module in modules_available:
+                PROJECT_MODULES.append(module)
+            else:
+                sys.stderr.write("\nW: 404 module not found: %s\n" % module)
+
+    ## Steroids is useful not only for web projects:
+    #if not "flask" in PROJECT_MODULES:
+    #    sys.stderr.write("\nW: Flask module not selected: added\n")
+    #    PROJECT_MODULES.insert(0, "flask")
+
     from steroids.installation import *
     
     if not os.path.exists(PROJECT_ABS_PATH):
@@ -55,6 +60,16 @@ if arguments.action == "init":
     requirements_file = open(os.path.join(PROJECT_ABS_PATH,"requirements.txt"), "w")
     requirements_file.write("\n".join(all_requirementes))
     requirements_file.close()
-    sys.stderr.write("done\n")
+    sys.stderr.write("done\n") 
+
+### Modules part ### 
+elif arguments.action == "modules":
+    if arguments.name == "list":
+        sys.stderr.write("Steroids modules available: \n")
+        for module_name in dir(steroids.modules):
+            if module_name[0] == "_": continue
+            sys.stderr.write(" - %s\n" % module_name)
+        sys.stderr.write("Use -m option to use what you need\n")
+
     
     
