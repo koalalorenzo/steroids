@@ -26,7 +26,7 @@ if arguments.action == "init":
     PROJECT_ABS_PATH = os.path.join(arguments.basepath,PROJECT_NAME)
     PROJECT_MODULES = list()
     
-    sys.stderr.write("# Initializing %s " % PROJECT_NAME)
+    sys.stderr.write("# Initializing %s\n" % PROJECT_NAME)
     if arguments.modules:
         modules_available = dir(steroids.modules)
         for module in arguments.modules:
