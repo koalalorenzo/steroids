@@ -70,6 +70,16 @@ elif arguments.action == "modules":
             if module_name[0] == "_": continue
             sys.stderr.write(" - %s\n" % module_name)
         sys.stderr.write("Use -m option to use what you need\n")
-
+        sys.stderr.write("By default Steroids uses flask, mongodb, tornado and honcho modules\n")
+        
+    elif arguments.name in dir(steroids.modules):
+        module_name = arguments.name
+        module = __import__("steroids.modules.%s" % module_name, globals(), locals(), [module_name], -1)
+        sys.stderr.write("Steroid module %s description:\n" % module_name)
+        sys.stderr.write(module.__help__)
+        sys.stderr.write("\nUse this command to use this module: \n")
+        sys.stderr.write("    steroids init ProjectName -m %s ..." % module_name)
+        
+        
     
     
