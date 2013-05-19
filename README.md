@@ -46,3 +46,11 @@ Once the Steroids structure is created, every developer can modify files in base
 
 ## License
 Steroids is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/)
+
+## Liks
+
+  * Project Site: [http://projects.setale.me/Steroids](http://projects.setale.me/Steroids)
+  * GitHub: [https://github.com/koalalorenzo/Steroids](https://github.com/koalalorenzo/Steroids)
+  * PyPi page: [https://pypi.python.org/pypi/steroids/](https://pypi.python.org/pypi/steroids/)    
+  * Author Website: [http://who.is.lorenzo.setale.me/?](http://setale.me/)
+  * Author Blog: [http://blog.setale.me/](http://blog.setale.me/)

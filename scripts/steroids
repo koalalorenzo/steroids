@@ -10,7 +10,6 @@ import steroids.modules
 import argparse
 import imp
 
-
 parser = argparse.ArgumentParser(description="Python Flask with Steroids")
 parser.add_argument('action', help="Action to perform", choices=["init","modules"])
 parser.add_argument('name', help="Project name")
