@@ -20,14 +20,14 @@ if [ $EXISTS -eq 0 ]; then
     if [ -f  /usr/bin/apt-get ]; then
         read -p "A: python-pip not installed. Would you like to install via apt-get?" yn
         case $yn in
-            [Yy]* ) sudo apt-get install python-pip python-dev; break;;
+            [Yy]* ) sudo apt-get install beep python-pip python-dev; break;;
             * ) exit;;
         esac
         
     elif [ -f  /usr/bin/pacman ]; then
         read -p "A: python-pip not installed. Would you like to install via pacman?" yn
         case $yn in
-            [Yy]* ) sudo pacman -S python2-pip; break;;
+            [Yy]* ) sudo pacman -S beep python2-pip; break;;
             * ) exit;;
         esac    
 
