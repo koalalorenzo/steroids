@@ -5,13 +5,20 @@
 In other words: Python Flask with Steroids
 
 ##Quick install
-*not ready*
+If you are using Unix-like OS, to install Steroids use this command, right from your terminal:
+
+    curl http://projects.setale.me/Steroids/install | sh
+
+In case the machine some requirements, the script will do it for you.
 
 ##Quick Use
 To generate a new project with examples use this command:
 
     steroids init ProjectName --examples=True
 
+If you need help you can use:
+
+    steroids --help
 
 ## Structure
 The structure of a Project built on Steroids is derived from Flask one. It provides Objects, Statics file, Views, Templates, Custom Decorators and others.
