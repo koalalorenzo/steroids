@@ -1,0 +1,4 @@
+## License
+Copyright (c) 2013, 2014 Lorenzo Setale
+
+Steroids is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/)
