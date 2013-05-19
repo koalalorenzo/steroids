@@ -26,7 +26,6 @@ The following structure is based on the default modules used: Flask, MongoDB, To
     ./configuration.py          # Configuration File
     ./server.py                 # script to start Server
     ./tornado.py                # script to start Tornado Server
-    ./clock.py                  # script to start the Scheduler
     ./Procfile                  # Foreman/Honcho file
     ./requirements.txt          # python packages required
     ./project/                  # Where the magic happens
