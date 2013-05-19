@@ -17,6 +17,10 @@ To generate a new project with examples use this command:
 If you need help you can use:
 
     steroids --help
+    
+You can specify to use small group of modules:
+
+    steroids init ProjectName --modules flask mongodb --examples=True
 
 ## Structure
 The structure of a Project built on Steroids is derived from Flask one. It provides Objects, Statics file, Views, Templates, Custom Decorators and others.
