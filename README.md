@@ -50,7 +50,7 @@ Steroids is builted around the concept of modules: the structure is defined but 
 
 By defaults Steroids uses Flask, Tornado, MongoDB and Honcho to provide a basic structure for a complete non-blocking web server. The project generated is **ready to be uploaded on [Heroku](https://www.heroku.com/)** or similar services.
 
-You can specify to use small group of modules:
+You can use a small specific group of modules in base of your needs. For example to initialize a project using only *Flask and MongoDB*, run this command:
 
     steroids init ProjectName --modules flask mongodb --examples=True
 
