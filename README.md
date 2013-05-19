@@ -1,6 +1,6 @@
 #Steroids
 ## 
-**Steroids** is a set of tools to **help developers** building **real-time ready**, **non-blocking**, **python web application** reducing efforts and time.
+**Steroids** is a set of tools to **help developers** to build **real-time ready**, **non-blocking**, **python web application** reducing efforts and time.
 
 ##Quick install
 If you are using Unix-like OS, to install Steroids use this command, right from your terminal:
