@@ -12,12 +12,12 @@ import imp
 
 
 parser = argparse.ArgumentParser(description="Python Flask with Steroids")
-parser.add_argument('action', help="Action to perform", choices=["init"])
+parser.add_argument('action', help="Action to perform", choices=["init","run"])
 parser.add_argument('name', help="Project name")
 
 parser.add_argument('--modules', '-m', nargs="*", default=["flask","mongodb","tornado","honcho"], help="Modules to use")
 parser.add_argument('--basepath', '-b', nargs=1, default=os.getcwd(), type=str, help="Path to use")
-parser.add_argument('--examples', '-e', nargs=1, default=False, type=bool, help="Install examples")
+parser.add_argument('--examples', '-e', nargs=1, default=False, type=bool, help="Install examples?")
 
 arguments = parser.parse_args()
     
@@ -39,7 +39,9 @@ if arguments.action == "init":
     
     if not os.path.exists(PROJECT_ABS_PATH):
         os.mkdir(PROJECT_ABS_PATH)
-    
+    else:
+        raise Exception("Directory already exists: %s" % PROJECT_ABS_PATH)
+        
     sys.stderr.write("Installing Modules:\n")
     
     all_requirementes = list()
