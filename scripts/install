@@ -49,6 +49,6 @@ cd "$INSTALL_TMPDIR"
 sudo pip-2.7 install -U -r requirements.txt
 sudo python2.7 setup.py install
 
-rm -rf "$INSTALL_TMPDIR"
+sudo rm -rf "$INSTALL_TMPDIR"
 
 read -s -r -p "Steroids installed... Press any key to continue..." -n 1 dummy
