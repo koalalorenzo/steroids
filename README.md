@@ -18,10 +18,6 @@ If you need help you can use:
 
     steroids --help
     
-You can specify to use small group of modules:
-
-    steroids init ProjectName --modules flask mongodb --examples=True
-
 ## Structure
 The structure of a Project built on Steroids is derived from Flask one. It provides Objects, Statics file, Views, Templates, Custom Decorators and others.
 
@@ -50,23 +46,23 @@ This structure give a lot of freedom to developers: they can modify it without p
 To **understand the structure** is suggested to enable the **examples** when initalizing a project.
 
 ## Modules
-These are the current modules available
+Steroids is builted around the concept of modules: the structure is defined but the content inside is modified by the modules. Each modules provide different funcionality to the project.
 
-  * [Tornado](http://www.tornadoweb.org/)
-  * [Flask](http://flask.pocoo.org/)
-  * [MongoDB](http://www.mongodb.org/)
-  * [APScheduler](http://pythonhosted.org/APScheduler/)
-  * [Honcho](https://pypi.python.org/pypi/honcho) / [Foreman](http://ddollar.github.io/foreman/)
- 
-Using **Tornado** combined with Python Flask, Steroids help developer to create a non-blocking, real-time ready web server. 
+By defaults Steroids uses Flask, Tornado, MongoDB and Honcho to provide a basic structure for a complete non-blocking web server. The project generated is **ready to be uploaded on [Heroku](https://www.heroku.com/)** or similar services.
 
-**MongoDB** is used as default database: is an advantage to save python objects in MongoDB.
+You can specify to use small group of modules:
 
-**APScheduler** helps to create cron or scheduled jobs. 
+    steroids init ProjectName --modules flask mongodb --examples=True
 
-Foreman/Honcho helps to manage the server ( *it also generates init scripts if needed* ).
+A list of modules is available running this command:
 
-Once the Steroids structure is created, every developer can modify files in base of his needs. For example you can avoid MongoDB and use a different database type.
+    steroids modules list
+
+To get help and read more about a module you can use this command:
+
+    steroids modules MODULE
+
+where *MODULE* is the name of the module get in the list ( ex: *flask* ).
 
 ## License
 Steroids is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/)
