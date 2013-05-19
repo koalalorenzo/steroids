@@ -66,7 +66,7 @@ Using **Tornado** combined with Python Flask, Steroids help developer to create 
 
 Foreman/Honcho helps to manage the server ( *it also generates init scripts if needed* ).
 
-Once the Steroids structure is created, every developer can modify files in base of his needs. For example you can avoid MongoDB and use other modules.
+Once the Steroids structure is created, every developer can modify files in base of his needs. For example you can avoid MongoDB and use a different database type.
 
 ## License
 Steroids is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/)
