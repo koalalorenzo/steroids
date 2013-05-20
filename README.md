@@ -5,7 +5,7 @@
 ##Quick install
 If you are using Unix-like OS, to install Steroids use this command, right from your terminal:
 
-    curl http://projects.setale.me/Steroids/install | bash
+    curl http://projects.setale.me/Steroids/install | sh 
 
 In case the machine some requirements, the script will do it for you. 
 
