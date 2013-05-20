@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 die() { echo >&2 -e "\nERROR: $@\n"; exit 1; }
-run() { $*; code=$?; [ $code -ne 0 ] && die "command [$*] failed with error code $code"; }
+run() { exec $*; code=$?; [ $code -ne 0 ] && die "command [$*] failed with error code $code"; }
 echo ""
 
 TARBALL_URL="http://projects.setale.me/Steroids/latest.tar.gz"
