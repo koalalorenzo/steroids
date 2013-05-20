@@ -44,6 +44,14 @@ if [ $EXISTS -eq 0 ]; then
     fi
 fi
 
+if [ -f /usr/bin/local/bin/steroids ]; then
+    run sudo pip-2.7 install -U steroids
+    echo "Steroid upgraded correctly... #Daje! "
+    exit
+fi
+
+
+
 run rm -rf "$INSTALL_TMPDIR"
 run mkdir "$INSTALL_TMPDIR"
 echo "Downloading the latest version... "
@@ -61,5 +69,4 @@ if [ -f /usr/bin/beep ]; then
 fi
 
 run sudo rm -rf "$INSTALL_TMPDIR"
-
-echo "Steroid installed Correctly"
+echo "Steroid installed correctly... #Daje! "
