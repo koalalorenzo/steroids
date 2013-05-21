@@ -104,6 +104,7 @@ MONGO_HOST = "127.0.0.1"
 MONGO_PORT = 27017
 MONGO_DB = "%s" 
 
+MONGO_NEEDS_AUTH = False
 MONGO_USERNAME = "username"
 MONGO_PASSWORD = "password"
     
@@ -116,7 +117,8 @@ from configuration import *
 
 db_connection =  Connection(MONGO_HOST, MONGO_PORT)
 db = db_connection[MONGO_DB]
-db.authenticate(MONGO_USERNAME,MONGO_PASSWORD)
+if MONGO_NEEDS_AUTH:
+    db.authenticate(MONGO_USERNAME,MONGO_PASSWORD)
 """)
     database_file.close()
 
@@ -136,7 +138,7 @@ from %s.objects.Master import Master
 
 class Example(Master):
     def __init__(self, database):
-        super().__init__()
+        super( Master, self ).__init__()
         self.dictionary = {"key":"value"}
         self.koalalorenzo = "is a great programmer"
         
