@@ -13,7 +13,7 @@ directories = [
     ]
 
 files = [
-    "[base]/tornado.py",
+    "[base]/nonblocking.py",
     ]
 
 def install(basepath, name):
@@ -21,7 +21,7 @@ def install(basepath, name):
         Install Tornado Module
     """
     
-    tornado_file = open(os.path.join(basepath,"tornado.py"), "w")
+    tornado_file = open(os.path.join(basepath,"nonblocking.py"), "w")
     tornado_file.write("from tornado.wsgi import WSGIContainer\n")
     tornado_file.write("from tornado.httpserver import HTTPServer\n")
     tornado_file.write("from tornado.ioloop import IOLoop\n")
