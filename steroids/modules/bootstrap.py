@@ -56,5 +56,32 @@ def install_examples(basepath, name):
     """
         Install Bootstrap Templates files. ( examples )
     """
-    #TODO
+    bootstrap_layout_file = open(os.path.join(basepath,name,"templates/bootstrap.html"), "w")
+    bootstrap_layout_file.write("""<html>
+    <head>
+        <title>%s - {% block title %}{% endblock %}</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="/static/bootstrap/js/bootstrap.js"></script>
+        <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        {% block header %}{% endblock %}
+        <div class="container">
+            {% block container %}{% endblock %}
+        </div>
+        {% block footer %}<hr>{% endblock %}
+    </body>    
+</html>""")
+    bootstrap_layout_file.close()
     return
