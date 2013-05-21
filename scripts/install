@@ -2,12 +2,14 @@
 
 die() { echo >&2 -e "\nERROR: $@\n"; exit 1; }
 run() { exec $*; code=$?; [ $code -ne 0 ] && die "command [$*] failed with error code $code"; }
-echo ""
 
 TARBALL_URL="http://projects.setale.me/Steroids/latest.tar.gz"
 INSTALL_TMPDIR="$HOME/.tmpsteroids"
 
 UNAME=$(uname)
+
+set -e
+set -u
 
 if [ "$UNAME" != "Linux" -a "$UNAME" != "Darwin" ] ; 
 then
@@ -44,17 +46,18 @@ if [ $EXISTS -eq 0 ]; then
     fi
 fi
 
-if [ -f /usr/bin/local/bin/steroids ]; then
+if [ -f /usr/local/bin/steroids ]; then
     run sudo pip-2.7 install -U steroids
+    if [ -f /usr/bin/beep ]; then
+        sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
+    fi
     echo "Steroid upgraded correctly... #Daje! "
-    exit
+    exit 0;
 fi
 
-
-
-run rm -rf "$INSTALL_TMPDIR"
-run mkdir "$INSTALL_TMPDIR"
 echo "Downloading the latest version... "
+sudo rm -rf "$INSTALL_TMPDIR"
+mkdir "$INSTALL_TMPDIR"
 run curl --progress-bar --fail "$TARBALL_URL" | tar -xzf - -C "$INSTALL_TMPDIR"
 cd "$INSTALL_TMPDIR"
 
@@ -65,8 +68,8 @@ echo "Installing Steroids... "
 run sudo python2.7 setup.py install
 
 if [ -f /usr/bin/beep ]; then
-    run sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
+    sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
 fi
 
-run sudo rm -rf "$INSTALL_TMPDIR"
+sudo rm -rf "$INSTALL_TMPDIR"
 echo "Steroid installed correctly... #Daje! "
