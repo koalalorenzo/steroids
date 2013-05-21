@@ -39,14 +39,12 @@ def install(basepath, name):
     
     current_dir = os.getcwd()
     bootstrap_zip = zipfile.ZipFile(bootstrap_file_path)
+    os.chdir(static_files_path)
     for f in bootstrap_zip.namelist():
         if f.endswith('/'):
             new_directory = os.path.join(static_files_path,f)
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            
-            os.chdir(current_dir)
-            os.chdir(new_directory)
         else:
             bootstrap_zip.extract(f)
     os.chdir(current_dir)
@@ -55,7 +53,7 @@ def install(basepath, name):
     bootstrap_layout_file = open(os.path.join(basepath,name,"templates/bootstrap.html"), "w")
     bootstrap_layout_file.write("""<html>
     <head>
-        <title>%s - {%% block title %}{% endblock %%}</title>
+        <title>%s - {%% block title %%}{%% endblock %%}</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,12 +70,12 @@ def install(basepath, name):
         {%% block head %%}{%% endblock %%}
     </head>
     <body>
-        {%% block header %%}{% endblock %%}
+        {%% block header %%}{%% endblock %%}
         <div class="container">
             {%% block container %%}{%% endblock %%}
+            %s is powered by <a href="http://projects.setale.me/Steroids">Steroids</a>
         </div>
-        {%% block footer %%}{%% endblock %%}<hr>
-        %s is powered by <a href="http://projects.setale.me/Steroids">Steroids</a>
+        {%% block footer %%}{%% endblock %%}
     </body>    
 </html>""" % (name, name))
     bootstrap_layout_file.close()
