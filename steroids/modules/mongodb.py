@@ -36,6 +36,7 @@ def install(basepath, name):
 
 from pymongo.objectid import ObjectId
 from %s.database import db
+import json
 
 class Master(object):
     def __init__(self):
@@ -87,7 +88,14 @@ class Master(object):
         if not json:
             output['_id'] = str(self.id)
         
-        return output""" % name )
+        return output
+        
+    def __json__(self, json=False):
+        \"""
+            This function returns a json dict of the Object.
+        \"""
+        return json.dumps(self.__dict__(json=True))
+""" % name )
     objectMaster_file.close()
 
     config_file = open(os.path.join(basepath,"configuration.py"), "a")
@@ -158,13 +166,7 @@ class Example(Master):
             output['_id'] = str(self.id)
         
         return output
-        
-    def __json__(self, json=False):
-        """
-            This function returns a json dict of the Object.
-        """
-        return self.__dict__(json=True)
-        
+
 """ % name)
     example_file.close()
 
