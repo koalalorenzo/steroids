@@ -141,6 +141,8 @@ from %s.objects.Master import Master
 class Example(Master):
     def __init__(self, database):
         super( Master, self ).__init__()
+        self.id = ObjectId()
+        
         self.dictionary = {"key":"value"}
         self.koalalorenzo = "is a great programmer"
         
