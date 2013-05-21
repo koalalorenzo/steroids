@@ -67,7 +67,7 @@ class Master(object):
         if not id:
             raise Exception("No ID specified")
         
-        dictionary = self.database.bookings.find_one( { "_id" : ObjectId(id) } )
+        dictionary = self.database[self.collection].find_one( { "_id" : ObjectId(id) } )
         if not dictionary:
             raise Exception("Not found")
         self.by_dictionary(dictionary)
