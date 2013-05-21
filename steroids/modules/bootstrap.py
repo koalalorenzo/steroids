@@ -18,7 +18,9 @@ directories = [
     "[base]/[name]/templates",
 ]
 
-files = [ ]
+files = [ 
+    "[base]/[name]/templates/bootstrap.html",
+]
 
 def install(basepath, name):
     """
@@ -50,16 +52,10 @@ def install(basepath, name):
     os.chdir(current_dir)
     os.remove(bootstrap_file_path)
     
-    return
-    
-def install_examples(basepath, name):
-    """
-        Install Bootstrap Templates files. ( examples )
-    """
     bootstrap_layout_file = open(os.path.join(basepath,name,"templates/bootstrap.html"), "w")
     bootstrap_layout_file.write("""<html>
     <head>
-        <title>%s - {% block title %}{% endblock %}</title>
+        <title>%s - {%% block title %}{% endblock %%}</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,15 +69,37 @@ def install_examples(basepath, name):
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        {% block head %}{% endblock %}
+        {%% block head %%}{%% endblock %%}
     </head>
     <body>
-        {% block header %}{% endblock %}
+        {%% block header %%}{% endblock %%}
         <div class="container">
-            {% block container %}{% endblock %}
+            {%% block container %%}{%% endblock %%}
         </div>
-        {% block footer %}<hr>{% endblock %}
+        {%% block footer %%}{%% endblock %%}<hr>
+        %s is powered by <a href="http://projects.setale.me/Steroids">Steroids</a>
     </body>    
-</html>""")
+</html>""" % (name, name))
     bootstrap_layout_file.close()
+    
+    return
+    
+def install_examples(basepath, name):
+    """
+        Install Bootstrap Templates files. ( examples )
+    """
+    bootstrap_example_file = open(os.path.join(basepath,name,"templates/homeExample/homepage.html"), "w")
+    bootstrap_example_file.write("""{% extends "bootstrap.html" %}
+
+{% block container %}
+<h1>Hello World!</h1>
+<div class="hero-unit">
+    <p class="lead">
+        This is an example using Bootstrap!
+    <p>
+</div>
+{% endblock %}
+""")
+    bootstrap_example_file.close()
+    
     return
