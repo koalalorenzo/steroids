@@ -158,6 +158,13 @@ class Example(Master):
             output['_id'] = str(self.id)
         
         return output
+        
+    def __json__(self, json=False):
+        """
+            This function returns a json dict of the Object.
+        """
+        return self.__dict__(json=True)
+        
 """ % name)
     example_file.close()
 
