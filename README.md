@@ -5,7 +5,7 @@
 <div align="center">
 
 <iframe src="http://ghbtns.com/github-btn.html?user=koalalorenzo&repo=Steroids&type=follow&size=large&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="235" height="30"></iframe>
+  allowtransparency="true" frameborder="0" scrolling="0" width="270" height="30"></iframe>
 
 <iframe src="http://ghbtns.com/github-btn.html?user=koalalorenzo&repo=Steroids&type=watch&size=large&count=true"
   allowtransparency="true" frameborder="0" scrolling="0" width="150" height="30"></iframe>
