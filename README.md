@@ -38,7 +38,7 @@ The structure of a Project built on Steroids is derived from Flask one. It provi
 
 The following structure is based on the default modules used: Flask, MongoDB, Tornado and Honcho.
 
-    ./settings.py          # Configuration File
+    ./settings.py               # Configuration File
     ./server.py                 # script to start Server
     ./nonblocking.py            # script to start non-blocking Server
     ./Procfile                  # Foreman/Honcho file
