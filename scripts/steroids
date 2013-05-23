@@ -25,7 +25,8 @@ arguments = parser.parse_args()
 ### Init part ###
 if arguments.action == "init":
     PROJECT_NAME = arguments.name
-    PROJECT_ABS_PATH = os.path.join(arguments.basepath,PROJECT_NAME)
+    if arguments.basepath != os.getcwd()
+        PROJECT_ABS_PATH = os.path.join(arguments.basepath[0],PROJECT_NAME)
     PROJECT_MODULES = list()
     
     sys.stderr.write("# Initializing %s\n" % PROJECT_NAME)
