@@ -20,7 +20,7 @@ directories = [
 ]
 
 files = [
-    "[base]/configuration.py",
+    "[base]/settings.py",
     "[base]/server.py",
     "[base]/[name]/__init__.py",
     "[base]/[name]/constants.py",
@@ -49,7 +49,7 @@ from flask import Flask
 from flask import url_for
 from flask import redirect
 
-from configuration import *
+from settings import *
 
 app = Flask(__name__)
 app.secret_key = FLASK_SECRET_KEY
@@ -64,7 +64,7 @@ def serve_static(afilepath):
 """ % (name, name))
 
     random_value = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
-    config_file = open(os.path.join(basepath,"configuration.py"), "a")
+    config_file = open(os.path.join(basepath,"settings.py"), "a")
     config_file.write("""# -*- coding=utf-8 -*-
     
 # Flask Config
@@ -77,7 +77,7 @@ FLASK_DEBUG = True
     server_file = open(os.path.join(basepath,"server.py"), "w")
     server_file.write("""
 from %s import app
-from configuration import FLASK_DEBUG, SERVER_PORT, SERVER_HOST
+from settings import FLASK_DEBUG, SERVER_PORT, SERVER_HOST
 
 app.debug = FLASK_DEBUG
 if __name__ == "__main__":

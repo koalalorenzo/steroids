@@ -18,7 +18,7 @@ directories = [
 ]
 
 files = [
-    "[base]/configuration.py",
+    "[base]/settings.py",
     "[base]/[name]/__init__.py",
     "[base]/[name]/database.py",
     "[base]/[name]/objects/__init__.py",
@@ -100,7 +100,7 @@ class Master(object):
 """ % name )
     objectMaster_file.close()
 
-    config_file = open(os.path.join(basepath,"configuration.py"), "a")
+    config_file = open(os.path.join(basepath,"settings.py"), "a")
     config_file.write("""#MongoDB Configuration
 MONGO_HOST = "127.0.0.1"
 MONGO_PORT = 27017
@@ -115,7 +115,7 @@ MONGO_PASSWORD = "password"
 
     database_file = open(os.path.join(basepath,"%s/database.py" % name), "w")
     database_file.write("""from pymongo import Connection
-from configuration import *
+from settings import *
 
 db_connection =  Connection(MONGO_HOST, MONGO_PORT)
 db = db_connection[MONGO_DB]

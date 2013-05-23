@@ -25,7 +25,7 @@ def install(basepath, name):
     tornado_file.write("from tornado.wsgi import WSGIContainer\n")
     tornado_file.write("from tornado.httpserver import HTTPServer\n")
     tornado_file.write("from tornado.ioloop import IOLoop\n")
-    tornado_file.write("from configuration import SERVER_PORT\n")
+    tornado_file.write("from settings import SERVER_PORT\n")
     tornado_file.write("from %s import app as application\n" % name)
     tornado_file.write("\n")
     tornado_file.write("http_server = HTTPServer(WSGIContainer(application))\n")
