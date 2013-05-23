@@ -5,7 +5,7 @@
 <div align="center">
 
 <iframe src="http://ghbtns.com/github-btn.html?user=koalalorenzo&repo=Steroids&type=follow&size=large&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="220" height="30"></iframe>
+  allowtransparency="true" frameborder="0" scrolling="0" width="235" height="30"></iframe>
 
 <iframe src="http://ghbtns.com/github-btn.html?user=koalalorenzo&repo=Steroids&type=watch&size=large&count=true"
   allowtransparency="true" frameborder="0" scrolling="0" width="150" height="30"></iframe>
@@ -38,7 +38,7 @@ The structure of a Project built on Steroids is derived from Flask one. It provi
 
 The following structure is based on the default modules used: Flask, MongoDB, Tornado and Honcho.
 
-    ./configuration.py          # Configuration File
+    ./settings.py          # Configuration File
     ./server.py                 # script to start Server
     ./nonblocking.py            # script to start non-blocking Server
     ./Procfile                  # Foreman/Honcho file
