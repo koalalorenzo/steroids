@@ -72,7 +72,24 @@ class Master(object):
             raise Exception("Not found")
         self.by_dictionary(dictionary)
         return self
+
+    def delete(self, id=None):
+        \"""
+            Load the object from the database
+        \"""
+        if not id:
+            id = self.id
+        if not id:
+            raise Exception("No ID specified")
         
+        self.database[self.collection].remove( { "_id" : id } )
+
+    def remove(self, id=None):
+        \"""
+            Load the object from the database
+        \"""
+        self.remove(id)
+
     def by_dictionary(self, dictionary, json=False):
         \"""
             This function loads the dictionary inside the object
