@@ -1,7 +1,6 @@
 import os
 
-__help__ = """
-"""
+__help__ = """This module will improve flask performance using Tornado non blocking web server."""
 
 
 requirements = [
@@ -18,7 +17,7 @@ files = [
 
 def install(basepath, name):
     """
-        Install Tornado Module
+        Install Flask-Tornado Module
     """
     
     tornado_file = open(os.path.join(basepath,"nonblocking.py"), "w")
@@ -36,6 +35,6 @@ def install(basepath, name):
     
 def install_examples(basepath, name):
     """
-        Install Tornado Module with example files
+        Install Flask-Tornado Module with example files
     """
     return
