@@ -38,6 +38,8 @@ def install(basepath, name):
     localfile.write(remote_file)
     localfile.close()
     
+    os.makedirs(temporary_files_path)
+
     current_dir = os.getcwd()
     topoact_zip = zipfile.ZipFile(topcoat_file_path)
     os.chdir(temporary_files_path)
@@ -52,7 +54,8 @@ def install(basepath, name):
     os.remove(topcoat_file_path)
     
     shutil.move(os.path.join(topcoat_file_path,"release", final_files_path))
-
+    shutil.rmtree(temporary_files_path)
+    
     topcoat_layout_file = open(os.path.join(basepath,name,"templates/topcoat.html"), "w")
     topcoat_layout_file.write("""<html>
     <head>
