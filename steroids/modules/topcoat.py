@@ -6,7 +6,7 @@ import urllib2
 import zipfile
 import shutil
 
-__help__ = """This module will install topcoat css style."""
+__help__ = """This module will install topcoat css style. Version: 0.3.0"""
 
 requirements = [ ]
 
@@ -24,7 +24,7 @@ files = [
 
 def install(basepath, name):
     """
-        Download Install Bootstrap files 
+        Download Install Topcoat 0.3.0 files 
     """
     # https://github.com/topcoat/topcoat/archive/0.3.0.zip
     
@@ -33,12 +33,12 @@ def install(basepath, name):
     temporary_files_path = os.path.join(basepath, name, "static/topcoat/temporary")
     topcoat_file_path = os.path.join(static_files_path, "topcoat.zip")
     
-    remote_file = urllib2.urlopen('https://github.com/topcoat/topcoat/archive/0.3.0.zip').read()
+    os.makedirs(temporary_files_path)
+    
+    remote_file = urllib2.urlopen('http://github.com/topcoat/topcoat/archive/0.3.0.zip').read()
     localfile = open(topcoat_file_path, 'w')
     localfile.write(remote_file)
     localfile.close()
-    
-    os.makedirs(temporary_files_path)
 
     current_dir = os.getcwd()
     topoact_zip = zipfile.ZipFile(topcoat_file_path)
@@ -53,7 +53,10 @@ def install(basepath, name):
     os.chdir(current_dir)
     os.remove(topcoat_file_path)
     
-    shutil.move(os.path.join(topcoat_file_path,"release"), final_files_path)
+    release_files_path = os.path.join(temporary_files_path,"topcoat-0.3.0/release")
+    shutil.move(os.path.join(release_files_path,"css"), final_files_path)
+    shutil.move(os.path.join(release_files_path,"font"), final_files_path)
+    shutil.move(os.path.join(release_files_path,"img"), final_files_path)
     shutil.rmtree(temporary_files_path)
 
     topcoat_layout_file = open(os.path.join(basepath,name,"templates/topcoat.html"), "w")
@@ -83,7 +86,7 @@ def install(basepath, name):
     
 def install_examples(basepath, name):
     """
-        Install Bootstrap Templates files. ( examples )
+        Install Topcoat 0.3.0 Templates files. ( examples )
     """
     bootstrap_example_file = open(os.path.join(basepath,name,"templates/homeExample/homepage.html"), "w")
     bootstrap_example_file.write("""{% extends "topcoat.html" %}
