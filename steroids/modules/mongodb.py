@@ -97,7 +97,7 @@ class Master(object):
         self.id = dictionary['_id']
         if json:
             self.id = ObjectId(dictionary['_id'])
-        
+
     def __dict__(self, json=False):
         \"""
             This function returns a dict of the Object.
