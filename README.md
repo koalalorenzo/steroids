@@ -78,6 +78,17 @@ To get help and read more about a module you can use this command:
 
 where *MODULE* is the name of the module get in the list ( ex: *flask* ).
 
+### Modules Available
+  * [Flask](http://flask.pocoo.org/) Web Server ( *flask* )
+  * Flask using [Tornado web server](http://flask.pocoo.org/docs/deploying/wsgi-standalone/#tornado) ( *flask-tornado* ) 
+  * [MongoDB](http://www.mongodb.org/) objects implementation ( *mongodb* )
+  * [Twitter Bootstrap](http://twitter.github.io/bootstrap/index.html) ( *bootstrap* )
+  * [Topcoat](http://topcoat.io/) CSS ( *topcoat* )
+  * [Honcho / Foreman](https://honcho.readthedocs.org/en/latest/) procfile ( *honcho* )
+  * [Google App Engine](https://developers.google.com/appengine/?hl=it) basic files - Alpha ( *googleappengine* )
+  * [APScheduler](http://pythonhosted.org/APScheduler/) for clock and cron jobs ( *apscheduler* )
+  * *…and more to come*
+
 ## License
 Steroids is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/)
 
