@@ -4,7 +4,7 @@
 import os
 import urllib2
 import zipfile
-import shutils
+import shutil
 
 __help__ = """This module will install topcoat css style."""
 
@@ -51,7 +51,7 @@ def install(basepath, name):
     os.chdir(current_dir)
     os.remove(topcoat_file_path)
     
-    shutils.move(os.path.join(topcoat_file_path,"release", final_files_path))
+    shutil.move(os.path.join(topcoat_file_path,"release", final_files_path))
 
     topcoat_layout_file = open(os.path.join(basepath,name,"templates/topcoat.html"), "w")
     topcoat_layout_file.write("""<html>
