@@ -38,6 +38,7 @@ from pymongo.objectid import ObjectId
 from %s.database import db
 import json
 
+
 class Master(object):
     def __init__(self):
         self.id = ObjectId()
@@ -51,44 +52,65 @@ class Master(object):
         
         dictionary = self.__dict__()
         
-        existing_dictionary = self.database[self.collection].find_one( { "id" : self.id } )
+        existing_dictionary = self.database[self.collection].find_one( { "_id" : ObjectId(self.id) } )
         if existing_dictionary:
             existing_dictionary.update(dictionary)
         else:
             existing_dictionary = dictionary
-        self.database[self.collection].save(existing_dictionary)
+        newId = self.database[self.collection].save(existing_dictionary)
+        self.id = newId
+
+    def delete(self):
+        \"""
+            Delete the object in the database
+        \"""
         
-    def load(self, id=None):
+        existing_dictionary = self.database[self.collection].remove( { "_id" : ObjectId(self.id) } )
+        self = None
+
+    def load(self, oid=None):
         \"""
             Load the object from the database
         \"""
-        if not id:
-            id = self.id
-        if not id:
+        if not oid:
+            oid = self.id
+        if not oid:
             raise Exception("No ID specified")
+
+        return self.load_by_query( { "_id" : ObjectId(oid) } )
         
-        dictionary = self.database[self.collection].find_one( { "_id" : id } )
+    def load_by_query(self, query):
+        \"""
+            Load object from query specific query
+        \"""
+        dictionary = self.database[self.collection].find_one( query )
         if not dictionary:
             raise Exception("Not found")
         self.by_dictionary(dictionary)
         return self
 
-    def delete(self, id=None):
+    def find_objects(self, query, limit=100, page=0):
         \"""
-            Load the object from the database
+            Find all the objects with a specific query
         \"""
-        if not id:
-            id = self.id
-        if not id:
-            raise Exception("No ID specified")
-        
-        self.database[self.collection].remove( { "_id" : id } )
+        query = self.database[self.collection].find(query)
+        query.limit(limit)
+        if page > 0:
+            query.skip(int(limit*page))
 
-    def remove(self, id=None):
+        objects = list()
+        for data in query:
+            new_object = self.__class__()
+            new_object.database = self.database
+            new_object.by_dictionary(data)
+            objects.append(new_object)
+        return objects
+    
+    def find_all(self, limit=100, page=0):
         \"""
-            Load the object from the database
+            Find all the objects
         \"""
-        self.remove(id)
+        return self.find_objects({}, limit=limit, page=page)
 
     def by_dictionary(self, dictionary, json=False):
         \"""
@@ -97,13 +119,14 @@ class Master(object):
         self.id = dictionary['_id']
         if json:
             self.id = ObjectId(dictionary['_id'])
-
+        
     def __dict__(self, json=False):
         \"""
             This function returns a dict of the Object.
         \"""
         output = dict()
-        output['_id'] = self.id
+        if self.id:
+            output['_id'] = self.id
         if not json:
             output['_id'] = str(self.id)
         
