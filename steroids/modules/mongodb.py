@@ -41,7 +41,7 @@ import json
 
 class Master(object):
     def __init__(self):
-        self.id = ObjectId()
+        self.id = None
         self.database = db
         self.collection = str()
         
@@ -58,7 +58,8 @@ class Master(object):
         else:
             existing_dictionary = dictionary
         newId = self.database[self.collection].save(existing_dictionary)
-        self.id = newId
+        if not self.id:
+            self.id = newId
 
     def delete(self):
         \"""
