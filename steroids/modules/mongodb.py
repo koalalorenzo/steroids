@@ -20,7 +20,6 @@ directories = [
 files = [
     "[base]/settings.py",
     "[base]/[name]/__init__.py",
-    "[base]/[name]/database.py",
     "[base]/[name]/objects/__init__.py",
     "[base]/[name]/objects/Master.py",
 ]
@@ -34,17 +33,29 @@ def install(basepath, name):
     objectMaster_file.write("""#!/usr/bin/env python
 # -*- coding=utf-8 -*-
 
+from pymongo import Connection
 from pymongo.objectid import ObjectId
-from %s.database import db
 import json
 
 
 class Master(object):
     def __init__(self):
         self.id = None
-        self.database = db
-        self.collection = str()
         
+        self._connection = None
+        self._database = None
+        self._collection = str()
+
+    def connect(self, host, port, dbname, collection=None, username=None, password=None):
+        \"""
+            This function will connect the object to the database. 
+        \"""
+
+        self._connection =  Connection(host, port)
+        self._database = self._connection[dbname]
+        if username and password:
+            self._database.authenticate(username,password)
+
     def save(self):
         \"""
             Save the object in the database and overwrite if it already exists.
@@ -52,12 +63,12 @@ class Master(object):
         
         dictionary = self.__dict__()
         
-        existing_dictionary = self.database[self.collection].find_one( { "_id" : ObjectId(self.id) } )
+        existing_dictionary = self._database[self._collection].find_one( { "_id" : ObjectId(self.id) } )
         if existing_dictionary:
             existing_dictionary.update(dictionary)
         else:
             existing_dictionary = dictionary
-        newId = self.database[self.collection].save(existing_dictionary)
+        newId = self._database[self._collection].save(existing_dictionary)
         if not self.id:
             self.id = newId
 
@@ -66,7 +77,7 @@ class Master(object):
             Delete the object in the database
         \"""
         
-        existing_dictionary = self.database[self.collection].remove( { "_id" : ObjectId(self.id) } )
+        existing_dictionary = self._database[self._collection].remove( { "_id" : ObjectId(self.id) } )
         self = None
 
     def load(self, oid=None):
@@ -84,7 +95,7 @@ class Master(object):
         \"""
             Load object from query specific query
         \"""
-        dictionary = self.database[self.collection].find_one( query )
+        dictionary = self._database[self._collection].find_one( query )
         if not dictionary:
             raise Exception("Not found")
         self.by_dictionary(dictionary)
@@ -94,7 +105,7 @@ class Master(object):
         \"""
             Find all the objects with a specific query
         \"""
-        query = self.database[self.collection].find(query)
+        query = self._database[self._collection].find(query)
         query.limit(limit)
         if page > 0:
             query.skip(int(limit*page))
@@ -102,7 +113,7 @@ class Master(object):
         objects = list()
         for data in query:
             new_object = self.__class__()
-            new_object.database = self.database
+            new_object.database = self._database
             new_object.by_dictionary(data)
             objects.append(new_object)
         return objects
@@ -154,17 +165,6 @@ MONGO_PASSWORD = "password"
 """ % name)
     config_file.close()
 
-    database_file = open(os.path.join(basepath,"%s/database.py" % name), "w")
-    database_file.write("""from pymongo import Connection
-from settings import *
-
-db_connection =  Connection(MONGO_HOST, MONGO_PORT)
-db = db_connection[MONGO_DB]
-if MONGO_NEEDS_AUTH:
-    db.authenticate(MONGO_USERNAME,MONGO_PASSWORD)
-""")
-    database_file.close()
-
     return
     
 def install_examples(basepath, name):
@@ -187,8 +187,8 @@ class Example(Master):
         self.dictionary = {"key":"value"}
         self.koalalorenzo = "is a great programmer"
         
-        self.database = database
-        self.collection = "Example"
+        self._database = database
+        self._collection = "Example"
         
     def by_dictionary(self, dictionary, json=False):
         \"""
