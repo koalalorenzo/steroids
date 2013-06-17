@@ -45,7 +45,6 @@ The following structure is based on the default modules used: Flask, MongoDB, To
     ./project/                  # Where the magic happens
              /__init__.py       # Server declarations 
              /conventions.py    # Generic conventions
-             /database.py       # Database conventions
              /decorators.py     # Common decorators 
              /views/            # Directory of Views
              /templates/        # Directory of Templates and HTML files
@@ -79,12 +78,13 @@ where *MODULE* is the name of the module get in the list ( ex: *flask* ).
 
 ### Modules Available
   * [Flask](http://flask.pocoo.org/) Web Server ( *flask* )
-  * Flask using [Tornado web server](http://flask.pocoo.org/docs/deploying/wsgi-standalone/#tornado) ( *flask-tornado* ) 
+  * Flask using [Tornado web server](http://flask.pocoo.org/docs/deploying/wsgi-standalone/#tornado) ( *flasktornado* ) 
   * [MongoDB](http://www.mongodb.org/) objects implementation ( *mongodb* )
   * [Twitter Bootstrap](http://twitter.github.io/bootstrap/index.html) ( *bootstrap* )
   * [Topcoat](http://topcoat.io/) CSS ( *topcoat* )
   * [Honcho / Foreman](https://honcho.readthedocs.org/en/latest/) procfile ( *honcho* )
-  * [Google App Engine](https://developers.google.com/appengine/?hl=it) basic files - Alpha ( *googleappengine* )
+  * [Google App Engine](https://developers.google.com/appengine/) basic files - [Alpha, not ready] ( *googleappengine* )
+  * [RethinkDB](http://rethinkdb.com/) objects implementation - [Alpha, not ready] ( *rethinkdb* )
   * [APScheduler](http://pythonhosted.org/APScheduler/) for clock and cron jobs ( *apscheduler* )
   * *…and more to come*
 
