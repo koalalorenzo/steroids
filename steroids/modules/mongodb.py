@@ -149,7 +149,7 @@ class Master(object):
             This function returns a json dict of the Object.
         \"""
         return json.dumps(self.__dict__(json=True))
-""" % name )
+""" )
     objectMaster_file.close()
 
     config_file = open(os.path.join(basepath,"settings.py"), "a")
