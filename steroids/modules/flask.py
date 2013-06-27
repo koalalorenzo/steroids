@@ -40,10 +40,10 @@ def install(basepath, name):
 \"""%s: Project Based on Steroids\"""
 
 __version__ = "0.1"
-__author__ = "Lorenzo Setale ( http://projects.setale.me/Steroids )"
-__author_email__ = "koalalorenzo@gmail.com"
-__license__ = "See: http://creativecommons.org/licenses/by-nd/3.0/ "
-__copyright__ = "Copyright (c) 2013, 2014 Lorenzo Setale"
+__author__ = "Your Name ( http://projects.setale.me/Steroids )"
+__author_email__ = "your_super_email_addr@domain.com"
+__license__ = ""
+__copyright__ = "Copyright (c) 2013, 2014 Somebody"
 
 from flask import Flask
 from flask import url_for
