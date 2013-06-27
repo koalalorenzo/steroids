@@ -15,7 +15,7 @@
 ##Quick install
 If you are using Unix-like OS, to install Steroids use this command, right from your terminal:
 
-    curl http://projects.setale.me/Steroids/install | sh 
+    curl -s http://projects.setale.me/Steroids/install | sh 
     
 
 This script will install everything you do it for you. It works on Debian-derived, Arch Linux, MacOS or every operative sistem with *easy_install*.
@@ -83,7 +83,7 @@ where *MODULE* is the name of the module get in the list ( ex: *flask* ).
   * [Twitter Bootstrap](http://twitter.github.io/bootstrap/index.html) ( *bootstrap* )
   * [Topcoat](http://topcoat.io/) CSS ( *topcoat* )
   * [Honcho / Foreman](https://honcho.readthedocs.org/en/latest/) procfile ( *honcho* )
-  * [Google App Engine](https://developers.google.com/appengine/) basic files - [Alpha, not ready] ( *googleappengine* )
+  * [Google App Engine](https://developers.google.com/appengine/) basic files ( *gae* )
   * [RethinkDB](http://rethinkdb.com/) objects implementation - [Alpha, not ready] ( *rethinkdb* )
   * [APScheduler](http://pythonhosted.org/APScheduler/) for clock and cron jobs ( *apscheduler* )
   * *…and more to come*
