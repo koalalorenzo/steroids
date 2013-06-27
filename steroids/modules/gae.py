@@ -19,8 +19,8 @@ requirements = [
 
 directories = [
     "[base]",
-    "[base]/modules"
-    "[base]/[name]"
+    "[base]/modules",
+    "[base]/[name]",
     "[base]/[name]/objects"
     ]
 
@@ -65,7 +65,6 @@ def install_examples(basepath, name):
     """
         Install Tornado Module with example files
     """
-
     gae_object_example = open(os.path.join(basepath,name,"objects/Example.py"), "w")
     gae_object_example.write("""#!/usr/bin/env python
 # -*- coding=utf-8 -*-
