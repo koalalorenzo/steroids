@@ -6,3 +6,4 @@ from . import mongodb
 from . import honcho
 from . import rethinkdb
 from . import topcoat
+from . import gae
