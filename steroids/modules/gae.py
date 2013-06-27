@@ -67,7 +67,27 @@ def install_examples(basepath, name):
     """
 
     gae_object_example = open(os.path.join(basepath,name,"objects/Example.py"), "w")
-    gae_object_example.write("""
+    gae_object_example.write("""#!/usr/bin/env python
+# -*- coding=utf-8 -*-
+
+from google.appengine.ext import db
+
+class Example(db.Model):
+    \"""
+        Location Object 
+    \"""
+    astring = db.StringProperty()
+    adescription = db.TextProperty()
+    atype = db.CategoryProperty()
+
+    apoint = db.GeoPtProperty()
+    anaddress = db.PostalAddressProperty()
+    somekeywords = db.StringListProperty()
+
+    afloat = db.FloatProperty()
+
+    arating = db.RatingProperty()
+    #areference = db.ReferenceProperty(Example)
 
 """ )
     gae_object_example.close()
