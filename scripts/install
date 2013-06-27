@@ -10,7 +10,7 @@ then
     exit 1
 fi
 
-# Using 2.7 to support ArchLinux and other OS that use python 3 too.
+# Using 2.7 to support Arch Linux and other OS that use python 3 too.
 PIPEXISTS=0
 if [ -f /usr/bin/pip-2.7 ]; then PIPEXISTS=1; fi;
 if [ -f /usr/local/bin/pip-2.7 ]; then PIPEXISTS=1; fi;
