@@ -1,6 +1,15 @@
 import os
+import sys
 
-__help__ = """Create Google App Engine.
+__help__ = """Google App Engine (gae)
+
+To use Google App Engine correctly with other modules ( ex: flask ) you 
+should use this command to install everything in your working directory:
+
+sudo pip install -U -r requirements.txt -t $PWD/modules
+
+This command will download and install all everything gae needs into the
+current directory.
 """
 
 
@@ -10,6 +19,9 @@ requirements = [
 
 directories = [
     "[base]",
+    "[base]/modules"
+    "[base]/[name]"
+    "[base]/[name]/objects"
     ]
 
 files = [
@@ -37,6 +49,11 @@ handlers:
 
     gae_py_file = open(os.path.join(basepath,"gae.py"), "w")
     gae_py_file.write("""from google.appengine.ext.webapp.util import run_wsgi_app
+
+import os
+import sys
+sys.path.append(os.path.join(os.getcwd(),"modules"))
+
 from %s import app
 run_wsgi_app(app)
 """ % name)
@@ -48,4 +65,11 @@ def install_examples(basepath, name):
     """
         Install Tornado Module with example files
     """
+
+    gae_object_example = open(os.path.join(basepath,name,"objects/Example.py"), "w")
+    gae_object_example.write("""
+
+""" )
+    gae_object_example.close()
+
     return
