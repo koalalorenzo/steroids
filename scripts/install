@@ -1,10 +1,6 @@
 #!/bin/sh
 
-TARBALL_URL="http://projects.setale.me/Steroids/latest.tar.gz"
-INSTALL_TMPDIR="$HOME/.tmpsteroids"
-
 UNAME=$(uname)
-
 set -e
 set -u
 
@@ -15,11 +11,11 @@ then
 fi
 
 # Using 2.7 to support ArchLinux and other OS that use python 3 too.
-EXISTS=0
-if [ -f /usr/bin/pip-2.7 ]; then EXISTS=1; fi;
-if [ -f /usr/local/bin/pip-2.7 ]; then EXISTS=1; fi;
+PIPEXISTS=0
+if [ -f /usr/bin/pip-2.7 ]; then PIPEXISTS=1; fi;
+if [ -f /usr/local/bin/pip-2.7 ]; then PIPEXISTS=1; fi;
 
-if [ $EXISTS -eq 0 ]; then
+if [ $PIPEXISTS -eq 0 ]; then
     if [ -f  /usr/bin/apt-get ]; then
 
         read -p "A: python-pip not installed. Would you like to install via apt-get?" yn
@@ -45,29 +41,19 @@ if [ $EXISTS -eq 0 ]; then
 fi
 
 if [ -f /usr/local/bin/steroids ]; then
-    sudo pip-2.7 install -U steroids
-    if [ -f /usr/bin/beep ]; then
-        sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
-    fi
-    echo "Steroid upgraded correctly... #Daje! "
-    exit 0;
+    tmp_alread_installed="y"
 fi
 
-echo "Downloading the latest version... "
-sudo rm -rf "$INSTALL_TMPDIR"
-mkdir "$INSTALL_TMPDIR"
-curl --progress-bar --fail "$TARBALL_URL" | tar -xzf - -C "$INSTALL_TMPDIR"
-cd "$INSTALL_TMPDIR"
-
-# Using 2.7 to support ArchLinux and other OS that use python 3 too.
-echo "Installing requirements... "
-sudo pip-2.7 install -U -r requirements.txt
-echo "Installing Steroids... "
-sudo python2.7 setup.py install
-
+echo "Downloading and installing steroids... " 
+sudo pip-2.7 install -U steroids -q
 if [ -f /usr/bin/beep ]; then
     sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
 fi
 
-sudo rm -rf "$INSTALL_TMPDIR"
+if [ "$tmp_alread_installed" == "y" ]; then
+    echo "Steroid upgraded correctly... #Daje! "
+    exit 0;
+fi
+
 echo "Steroid installed correctly... #Daje! "
+exit 0;
