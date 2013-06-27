@@ -86,7 +86,10 @@ def install_examples(basepath, name):
     """
         Install Bootstrap Templates files. ( examples )
     """
-    bootstrap_example_file = open(os.path.join(basepath,name,"templates/homeExample/homepage.html"), "w")
+    bootstrap_example_directory = os.path.join(basepath,name,"templates/homeExample/")
+    if not os.path.exists(bootstrap_example_directory):
+        os.mkdir(bootstrap_example_directory)
+    bootstrap_example_file = open(os.path.join(bootstrap_example_directory, "homepage.html"), "w")
     bootstrap_example_file.write("""{% extends "bootstrap.html" %}
 
 {% block container %}
