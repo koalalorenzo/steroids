@@ -12,7 +12,7 @@ directories = [
     ]
 
 files = [
-    "[base]/nonblocking.py",
+    "[base]/flasktornado.py",
     ]
 
 def install(basepath, name):
@@ -20,7 +20,7 @@ def install(basepath, name):
         Install Flask-Tornado Module
     """
     
-    tornado_file = open(os.path.join(basepath,"nonblocking.py"), "w")
+    tornado_file = open(os.path.join(basepath,"flasktornado.py"), "w")
     tornado_file.write("from tornado.wsgi import WSGIContainer\n")
     tornado_file.write("from tornado.httpserver import HTTPServer\n")
     tornado_file.write("from tornado.ioloop import IOLoop\n")
