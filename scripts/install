@@ -51,7 +51,7 @@ if [ -f /usr/bin/beep ]; then
     sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
 fi
 
-if [ "$tmp_alread_installed" == "y" ]; then
+if [[ "$tmp_alread_installed" == "y" ]]; then
     echo "Steroid upgraded correctly... #Daje! "
     exit 0;
 fi
