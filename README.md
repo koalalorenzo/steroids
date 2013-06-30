@@ -1,6 +1,6 @@
 #Steroids
 ## 
-**Steroids** is a set of tools to **help python developers** to build **real-time ready**, **non-blocking**, **web application** reducing efforts and time.
+**Steroids** is a set of tools to **help python developers** to build **cool stuff** reducing efforts and time.
 
 <div align="center">
 
@@ -15,14 +15,14 @@
 ##Quick install
 If you are using Unix-like OS, to install Steroids use this command, right from your terminal:
 
-    curl -s http://projects.setale.me/Steroids/install | sh 
+    curl -s http://projects.setale.me/Steroids/install | sudo sh 
     
 
 This script will install everything you do it for you. It works on Debian-derived, Arch Linux, MacOS or every operative sistem with *easy_install*.
 
 Alternatively You can also install Steroids via *python pip* command:
 
-    pip install Steroids
+    sudo pip install Steroids
 
 ##Quick Use
 To generate a new project with examples use this command:
@@ -34,31 +34,29 @@ If you need help you can use:
     steroids --help
     
 ## Structure
-The structure of a Project built on Steroids is derived from Flask one. It provides Objects, Statics file, Views, Templates, Custom Decorators and others.
+The structure of a Project built on Steroids is derived from [Flask](http://flask.pocoo.org/docs/patterns/packages/#simple-packages) one. It provides Objects, Statics file, Views, Templates, Custom Decorators and others.
 
-The following structure is based on the default modules used: Flask, MongoDB, Tornado and Honcho.
+The following structure is based on the default modules used: Flask, MongoDB and Honcho.
 
-    ./settings.py               # Configuration File
-    ./server.py                 # script to start Server
-    ./Procfile                  # Foreman/Honcho file
-    ./requirements.txt          # python packages required
-    ./project/                  # Where the magic happens
-             /__init__.py       # Server declarations 
-             /conventions.py    # Generic conventions
-             /decorators.py     # Common decorators 
-             /views/            # Directory of Views
-             /templates/        # Directory of Templates and HTML files
-             /static/           # Directory of static files
-             /objects/          # Directory of Objects
-                     /Master.py # Objects should be derived from Master
+    ./settings.py           # Configuration File
+    ./server.py             # script to start Server
+    ./Procfile              # Foreman/Honcho file
+    ./requirements.txt      # Everything you need goes here
+    ./project/              # Where the magic happens
+             /__init__.py   # Package declarations 
+             /views/        # Directory of Views
+             /templates/    # Directory of Templates
+             /static/       # Directory of static files
+             /objects/      # Directory of Objects
                
+If you use different modules, Steroids will generate a different structure of files and directories.
 
 This structure give a lot of freedom to developers: they can modify it without problems adapting the structure in base of what they do. Steroids structure is just an ordered way to create web services in python.
 
-To **understand the structure** is suggested to enable the **examples** when initalizing a project.
+To **understand the structure** is suggested to enable the **examples** when initializing a project.
 
 ## Modules
-Steroids is builted around the concept of modules: the structure is defined but the content inside is modified by the modules. Each modules provide different funcionality to the project.
+Steroids is built around the concept of modules: the structure is defined but the content inside is modified by the modules. Each modules provide different functionality to the project.
 
 By defaults Steroids uses Flask, Tornado, MongoDB and Honcho to provide a basic structure for a complete non-blocking web server. The project generated is **ready to be uploaded on [Heroku](https://www.heroku.com/)** or similar services.
 
