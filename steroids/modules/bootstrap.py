@@ -5,7 +5,7 @@ import os
 import urllib2
 import zipfile
 
-__help__ = """This module will install Twitter bootstrap. If you use examples, the module will generate bootstrap-ready html files in templates directory! """
+__help__ = """This module will install Twitter bootstrap. If you use examples, the module will generate bootstrap-ready html files in templates directory. """
 
 
 requirements = [ ]
