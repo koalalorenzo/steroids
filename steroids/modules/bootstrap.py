@@ -16,10 +16,12 @@ directories = [
     "[base]/[name]/static",
     "[base]/[name]/static/bootstrap",
     "[base]/[name]/templates",
+    "[base]/[name]/views",
 ]
 
 files = [ 
     "[base]/[name]/templates/bootstrap.html",
+    "[base]/[name]/views/__init__.py",
 ]
 
 def install(basepath, name):
@@ -53,7 +55,7 @@ def install(basepath, name):
     bootstrap_layout_file = open(os.path.join(basepath,name,"templates/bootstrap.html"), "w")
     bootstrap_layout_file.write("""<html>
     <head>
-        <title>%s - {%% block title %%}{%% endblock %%}</title>
+        <title>%s {%% block title %%}{%% endblock %%}</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,9 +88,14 @@ def install_examples(basepath, name):
     """
         Install Bootstrap Templates files. ( examples )
     """
-    bootstrap_example_directory = os.path.join(basepath,name,"templates/homeExample/")
+    example_directory = os.path.join(basepath,name,"templates/examples")
+    if not os.path.exists(example_directory):
+        os.mkdir(example_directory)
+
+    bootstrap_example_directory = os.path.join(example_directory, "bootstrap")
     if not os.path.exists(bootstrap_example_directory):
         os.mkdir(bootstrap_example_directory)
+    
     bootstrap_example_file = open(os.path.join(bootstrap_example_directory, "homepage.html"), "w")
     bootstrap_example_file.write("""{% extends "bootstrap.html" %}
 
@@ -103,4 +110,29 @@ def install_examples(basepath, name):
 """)
     bootstrap_example_file.close()
     
+    init_file = open(os.path.join(basepath,"%s/__init__.py" % name), "a")
+    init_file.write("\nimport %s.views.bootstrapExample\n" % name)
+    init_file.close()
+    
+    example_file = open(os.path.join(basepath,"%s/views/bootstrapExample.py" % name), "w")
+    example_file.write("""#!/usr/bin/python
+# -*- coding=utf-8 -*-
+from %s import app
+from %s.decorators import *
+from %s.constants import *
+
+from flask import render_template
+from flask import url_for
+from flask import session
+from flask import abort
+from flask import redirect
+from flask import flash
+
+@app.route("/bootstrap")
+def bootstrapExample_homepage():
+    return render_template("examples/bootstrap/homepage.html")
+
+""" % (name, name, name))
+    example_file.close()
+
     return

@@ -16,10 +16,12 @@ directories = [
     "[base]/[name]/static",
     "[base]/[name]/static/topcoat",
     "[base]/[name]/templates",
+    "[base]/[name]/views",
 ]
 
 files = [ 
     "[base]/[name]/templates/topcoat.html",
+    "[base]/[name]/views/__init__.py",
 ]
 
 def install(basepath, name):
@@ -88,8 +90,16 @@ def install_examples(basepath, name):
     """
         Install Topcoat 0.3.0 Templates files. ( examples )
     """
-    bootstrap_example_file = open(os.path.join(basepath,name,"templates/homeExample/homepage.html"), "w")
-    bootstrap_example_file.write("""{% extends "topcoat.html" %}
+    example_directory = os.path.join(basepath,name,"templates/examples")
+    if not os.path.exists(example_directory):
+        os.mkdir(example_directory)
+
+    topcoat_examples_directory = os.path.join(example_directory, "topcoat")
+    if not os.path.exists(topcoat_examples_directory):
+        os.mkdir(topcoat_examples_directory)
+
+    topcoat_example_template_file = open(os.path.join(topcoat_examples_directory, "homepage.html"), "w")
+    topcoat_example_template_file.write("""{% extends "topcoat.html" %}
 
 {% block container %}
 <h1>Hello World!</h1>
@@ -98,6 +108,31 @@ def install_examples(basepath, name):
 </div>
 {% endblock %}
 """)
-    bootstrap_example_file.close()
+    topcoat_example_template_file.close()
     
+    init_file = open(os.path.join(basepath, name, "__init__.py"), "a")
+    init_file.write("\nimport %s.views.topcoatExample\n" % name)
+    init_file.close()
+    
+    example_view_file = open(os.path.join(basepath, name, "views/topcoatExample.py"), "w")
+    example_view_file.write("""#!/usr/bin/python
+# -*- coding=utf-8 -*-
+from %s import app
+from %s.decorators import *
+from %s.constants import *
+
+from flask import render_template
+from flask import url_for
+from flask import session
+from flask import abort
+from flask import redirect
+from flask import flash
+
+@app.route("/topcoat")
+def topcoatExample_homepage():
+    return render_template("examples/topcoat/homepage.html")
+
+""" % (name, name, name))
+    example_view_file.close()
+
     return

@@ -93,10 +93,10 @@ def install_examples(basepath, name):
     """
     
     init_file = open(os.path.join(basepath,"%s/__init__.py" % name), "a")
-    init_file.write("\nimport %s.views.homeExample\n" % name)
+    init_file.write("\nimport %s.views.example\n" % name)
     init_file.close()
     
-    example_file = open(os.path.join(basepath,"%s/views/homeExample.py" % name), "w")
+    example_file = open(os.path.join(basepath,"%s/views/example.py" % name), "w")
     example_file.write("""#!/usr/bin/python
 # -*- coding=utf-8 -*-
 from %s import app
