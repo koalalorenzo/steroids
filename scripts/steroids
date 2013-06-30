@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(description="Python Flask with Steroids")
 parser.add_argument('action', help="Action to perform", choices=["init","modules"])
 parser.add_argument('name', help="Project name")
 
-parser.add_argument('--modules', '-m', nargs="*", default=["flask","mongodb","flasktornado","honcho"], help="Modules to use")
+parser.add_argument('--modules', '-m', nargs="*", default=["flask","mongodb","bootstrap","honcho","gunicorn"], help="Modules to use")
 parser.add_argument('--basepath', '-b', nargs=1, default=None, type=str, help="Path to use")
 parser.add_argument('--examples', '-e', nargs=1, default=False, type=bool, help="Install examples?")
 parser.add_argument('--version', "-v", action='version', version=steroids.__version__)
@@ -82,7 +82,7 @@ elif arguments.action == "modules":
             sys.stderr.write(" - %s\n" % module_name)
         sys.stderr.write("\n")
         sys.stderr.write("Use -m option to use what you need\n")
-        sys.stderr.write("By default Steroids uses flask, mongodb, tornado and honcho modules\n")
+        sys.stderr.write("By default Steroids uses flask, mongodb, bootstrap, gunicorn and honcho modules\n")
         
     elif arguments.name in dir(steroids.modules):
         module_name = arguments.name
