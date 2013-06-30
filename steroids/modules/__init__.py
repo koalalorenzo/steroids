@@ -8,3 +8,4 @@ from . import rethinkdb
 from . import topcoat
 from . import gae
 from . import gunicorn
+from . import jquery
