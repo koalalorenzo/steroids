@@ -27,7 +27,7 @@ def install(basepath, name):
     static_files_path = os.path.join(basepath, name, "static/")
     jquery_file_path = os.path.join(static_files_path,"jquery.min.js")
 
-    remote_file = urllib2.urlopen('http://').read() #TODO
+    remote_file = urllib2.urlopen('http://code.jquery.com/jquery-latest.min.js').read()
     localfile = open(jquery_file_path, 'w')
     localfile.write(remote_file)
     localfile.close()
