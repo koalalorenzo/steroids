@@ -18,21 +18,21 @@ if [ -f /usr/local/bin/pip-2.7 ]; then PIPEXISTS=1; fi;
 if [ $PIPEXISTS -eq 0 ]; then
     if [ -f  /usr/bin/apt-get ]; then
 
-        read -p "A: python-pip not installed. Would you like to install via apt-get?" yn
+        read -p "A: python-pip not installed. Would you like to install via apt-get? [y/n] " yn
         case $yn in
             [Yy]* ) sudo apt-get install beep python-pip python-dev;;
             * ) exit;;
         esac
         
     elif [ -f  /usr/bin/pacman ]; then
-        read -p "A: python-pip not installed. Would you like to install via pacman?" yn
+        read -p "A: python-pip not installed. Would you like to install via pacman? [y/n] " yn
         case $yn in
             [Yy]* ) sudo pacman -S beep python2-pip;;
             * ) exit;;
         esac    
 
     elif [ -f  /usr/bin/easy_install-2.7 ]; then
-        read -p "A: python-pip not installed. Would you like to install via easy_install?" yn
+        read -p "A: python-pip not installed. Would you like to install via easy_install? [y/n] " yn
         case $yn in
             [Yy]* ) sudo easy_install-2.7 pip;;
             * ) exit;;
@@ -48,7 +48,7 @@ fi
 echo "Downloading and installing steroids... " 
 sudo pip-2.7 install -U steroids -q
 if [ -f /usr/bin/beep ]; then
-    sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104 >> $INSTALL_TMPDIR/beep.log
+    sudo beep -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 138 -n -f 392.0 -l 138 -n -f 329.6 -l 138 -n -f 523.2 -l 828 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 138 -n -f 415.3 -l 138 -n -f 349.2 -l 138 -n -f 554.4 -l 828 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 138 -n -f 466.2 -l 138 -n -f 392.0 -l 138 -n -f 622.2 -l 414 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 698.4 -l 138 -n -f 792 -l 1104
 fi
 
 if [[ "$tmp_alread_installed" == "y" ]]; then
