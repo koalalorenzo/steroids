@@ -18,23 +18,26 @@ if [ -f /usr/local/bin/pip-2.7 ]; then PIPEXISTS=1; fi;
 if [ $PIPEXISTS -eq 0 ]; then
     if [ -f  /usr/bin/apt-get ]; then
 
-        read -p "A: python-pip not installed. Would you like to install via apt-get? [y/n] " yn
+        read -p "A: python-pip not installed. Would you like to install via apt-get? [Y/n] " yn
         case $yn in
             [Yy]* ) sudo apt-get install beep python-pip python-dev;;
+            '' ) sudo apt-get install beep python-pip python-dev;;
             * ) exit;;
         esac
         
     elif [ -f  /usr/bin/pacman ]; then
-        read -p "A: python-pip not installed. Would you like to install via pacman? [y/n] " yn
+        read -p "A: python-pip not installed. Would you like to install via pacman? [Y/n] " yn
         case $yn in
             [Yy]* ) sudo pacman -S beep python2-pip;;
+            '' ) sudo pacman -S beep python2-pip;;
             * ) exit;;
         esac    
 
     elif [ -f  /usr/bin/easy_install-2.7 ]; then
-        read -p "A: python-pip not installed. Would you like to install via easy_install? [y/n] " yn
+        read -p "A: python-pip not installed. Would you like to install via easy_install? [Y/n] " yn
         case $yn in
             [Yy]* ) sudo easy_install-2.7 pip;;
+            '' ) sudo easy_install-2.7 pip;;
             * ) exit;;
         esac
     fi
