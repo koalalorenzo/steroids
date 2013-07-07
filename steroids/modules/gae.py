@@ -39,7 +39,7 @@ def install(basepath, name):
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: yes
+threadsafe: false
 
 handlers:
 - url: .*
