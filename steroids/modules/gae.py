@@ -44,6 +44,12 @@ threadsafe: yes
 handlers:
 - url: .*
   script: gae.py
+
+# Remember to install everything inside ./modules/
+#   pip install -U -r requirements.txt -t $PWD/modules
+# And then
+#   pip install -U -r requirements.txt
+
 """ % name)
     gae_yaml_file.close()
 
