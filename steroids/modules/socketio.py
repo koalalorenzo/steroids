@@ -27,13 +27,14 @@ def install(basepath, name):
     # https://raw.github.com/LearnBoost/socket.io-client/master/socket.io-client.js
     
     static_files_path = os.path.join(basepath, name, "static/")
-    socketioclient_file_path = os.path.join(static_files_path,"socket.io-client.js")
+    socketioclient_file_path = os.path.join(static_files_path,"socket.io.js")
 
     remote_file = urllib2.urlopen('https://raw.github.com/LearnBoost/socket.io-client/master/socket.io-client.js').read()
     localfile = open(socketioclient_file_path, 'w')
     localfile.write(remote_file)
     localfile.close()
 
+    templates_path = os.path.join(basepath,name,"templates")
     template_socketio = open(os.path.join(templates_path, "socketio.html"), "w")
     template_socketio.write("""<html>
     <head>
@@ -106,6 +107,7 @@ from %s.constants import *
 from flask import render_template
 from flask import url_for
 from flask import session
+from flask import request
 from flask import abort
 from flask import redirect
 from flask import flash
@@ -132,12 +134,21 @@ class AlertsNamespace(BaseNamespace):
     def on_alert():
         self.emit("alert");
 
-@app.route('/socket.io/<path:path>')
-def run_socketio(path):
+@app.route('/socket.io/socket.io.js')
+def socketio_static():
+    return redirect(url_for('static', filename="socket.io.js"))
+
+@app.route('/socket.io/<path:tpath>')
+def socketio_run(tpath):
     real_request = request._get_current_object()
     socketio_manage(request.environ, {'/alerter': AlertsNamespace},
             request=real_request)
     return Response()
+
+@app.route('/alerter')
+def socketio_alerter():
+    return render_template("examples/socketio/alert.html")
+
 
 """ % (name, name, name))
     template_alert_users.close()
