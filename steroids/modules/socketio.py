@@ -54,7 +54,7 @@ def install(basepath, name):
     template_socketio.close()
 
     views_path = os.path.join(basepath,name,"views")
-    template_alert_users = open(os.path.join(views_path, "socketioExample.py"), "w")
+    template_alert_users = open(os.path.join(views_path, "websockets.py"), "w")
     template_alert_users.write("""from %s import app
 from %s.decorators import *
 from %s.constants import *
@@ -70,7 +70,7 @@ from flask import flash
 from socketio import socketio_manage
 from socketio.namespace import BaseNamespace
 
-class AlertsNamespace(BaseNamespace):
+class CustomNamespace(BaseNamespace):
     def __init__(self, *args, **kwargs):
         request = kwargs.get('request', None)
         self.ctx = None
@@ -96,7 +96,7 @@ def socketio_static():
 @app.route('/socket.io/<path:tpath>')
 def socketio_run(tpath):
     real_request = request._get_current_object()
-    socketio_manage(request.environ, {'/alerter': AlertsNamespace},
+    socketio_manage(request.environ, {'/alerter': CustomNamespace},
             request=real_request)
     return Response()
 
@@ -104,7 +104,7 @@ def socketio_run(tpath):
     template_alert_users.close()
 
     init_file = open(os.path.join(basepath, name, "__init__.py"), "a")
-    init_file.write("\nimport %s.views.socketioExample\n" % name)
+    init_file.write("\nimport %s.views.websockets\n" % name)
     init_file.close()
     
     return
@@ -118,7 +118,7 @@ def install_examples(basepath, name):
     if not os.path.exists(examples_tempaltes_path):
         os.mkdir(examples_tempaltes_path)
 
-    examples_template_alert_path = os.path.join(examples_tempaltes_path,"socketio")
+    examples_template_alert_path = os.path.join(examples_tempaltes_path,"websockets")
     if not os.path.exists(examples_template_alert_path):
         os.mkdir(examples_template_alert_path)
 
@@ -151,13 +151,13 @@ def install_examples(basepath, name):
 
 
     views_path = os.path.join(basepath,name,"views")
-    view_example_files = open(os.path.join(views_path, "socketioExample.py"), "a")
+    view_example_files = open(os.path.join(views_path, "websockets.py"), "a")
     view_example_files.write("""
 
 # SocketIo Example:
 @app.route('/alerter')
 def socketio_alerter():
-    return render_template("examples/socketio/alert.html")
+    return render_template("examples/websockets/alert.html")
 
 """ % name)
     view_example_files.close()
