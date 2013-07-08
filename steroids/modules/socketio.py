@@ -66,6 +66,7 @@ from flask import request
 from flask import abort
 from flask import redirect
 from flask import flash
+from flask import send_from_directory
 
 from socketio import socketio_manage
 from socketio.namespace import BaseNamespace
@@ -91,7 +92,7 @@ class CustomNamespace(BaseNamespace):
 
 @app.route('/socket.io/socket.io.js')
 def socketio_static():
-    return redirect(url_for('static', filename="socket.io.js"))
+    return send_from_directory('static', "socket.io.js"))
 
 @app.route('/socket.io/<path:tpath>')
 def socketio_run(tpath):
@@ -159,7 +160,7 @@ def install_examples(basepath, name):
 def socketio_alerter():
     return render_template("examples/websockets/alert.html")
 
-""" % name)
+""" )
     view_example_files.close()
 
 
