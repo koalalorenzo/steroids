@@ -16,6 +16,7 @@ directories = [
     "[base]/[name]",
     "[base]/[name]/static",
     "[base]/[name]/templates",
+    "[base]/[name]/views",
 ]
 
 files = [ ]
@@ -51,54 +52,8 @@ def install(basepath, name):
     </body>
 </html>""" % name)
     template_socketio.close()
-    
-    return
-    
-def install_examples(basepath, name):
-    """
-        Install socket.io examples. 
-    """
-
-    examples_tempaltes_path = os.path.join(basepath,name,"templates","examples")
-    if not os.path.exists(examples_tempaltes_path):
-        os.mkdir(examples_tempaltes_path)
-
-    examples_template_alert_path = os.path.join(examples_tempaltes_path,"socketio")
-    if not os.path.exists(examples_template_alert_path):
-        os.mkdir(examples_template_alert_path)
-
-    template_alert_users = open(os.path.join(examples_template_alert_path, "alert.html"), "w")
-    template_alert_users.write("""{% extends "socketio.html" %}
-
-{% block container %}
-<h1>Hello world!</h1>
-<div class="hero-unit">
-    <p class="lead">
-        <a class="btn btn-large" href="javascript:void(0);" onclick="alertUsers();">alert every users connected</a>
-    <p>
-</div>
-
-<script>
-  var alerter = io.connect('http://localhost/alerter')
-  
-  alerter.on('connect', function () {
-    alert("!!!");
-  });
-
-  function alertUsers() {
-    alerter.emit("alert");
-  }
-</script>
-{% endblock %}
-
-    """)
-    template_alert_users.close()
-
 
     views_path = os.path.join(basepath,name,"views")
-    if not os.path.exists(views_path):
-        os.mkdir(views_path)
-
     template_alert_users = open(os.path.join(views_path, "socketioExample.py"), "w")
     template_alert_users.write("""from %s import app
 from %s.decorators import *
@@ -145,17 +100,68 @@ def socketio_run(tpath):
             request=real_request)
     return Response()
 
-@app.route('/alerter')
-def socketio_alerter():
-    return render_template("examples/socketio/alert.html")
-
-
 """ % (name, name, name))
     template_alert_users.close()
 
     init_file = open(os.path.join(basepath, name, "__init__.py"), "a")
     init_file.write("\nimport %s.views.socketioExample\n" % name)
     init_file.close()
+    
+    return
+    
+def install_examples(basepath, name):
+    """
+        Install socket.io examples. 
+    """
+
+    examples_tempaltes_path = os.path.join(basepath,name,"templates","examples")
+    if not os.path.exists(examples_tempaltes_path):
+        os.mkdir(examples_tempaltes_path)
+
+    examples_template_alert_path = os.path.join(examples_tempaltes_path,"socketio")
+    if not os.path.exists(examples_template_alert_path):
+        os.mkdir(examples_template_alert_path)
+
+    template_alert_users = open(os.path.join(examples_template_alert_path, "alert.html"), "w")
+    template_alert_users.write("""{% extends "socketio.html" %}
+
+{% block container %}
+<h1>Hello world!</h1>
+<div class="hero-unit">
+    <p class="lead">
+        <a class="btn btn-large" href="javascript:void(0);" onclick="alertUsers();">alert every users connected</a>
+    <p>
+</div>
+
+<script>
+  var alerter = io.connect('http://localhost/alerter')
+  
+  alerter.on('connect', function () {
+    alert("!!!");
+  });
+
+  function alertUsers() {
+    alerter.emit("alert");
+  }
+</script>
+{% endblock %}
+
+    """)
+    template_alert_users.close()
+
+
+    views_path = os.path.join(basepath,name,"views")
+    view_example_files = open(os.path.join(views_path, "socketioExample.py"), "a")
+    view_example_files.write("""
+
+# SocketIo Example:
+@app.route('/alerter')
+def socketio_alerter():
+    return render_template("examples/socketio/alert.html")
+
+""" % name)
+    view_example_files.close()
+
 
 
     return
