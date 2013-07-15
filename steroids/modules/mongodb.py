@@ -34,7 +34,7 @@ def install(basepath, name):
 # -*- coding=utf-8 -*-
 
 from pymongo import Connection
-from pymongo.objectid import ObjectId
+from bson.objectid import ObjectId
 import json
 
 
@@ -178,7 +178,7 @@ def install_examples(basepath, name):
     example_file.write("""#!/usr/bin/env python
 # -*- coding=utf-8 -*-
 
-from pymongo.objectid import ObjectId
+from bson.objectid import ObjectId
 from %s.objects.Master import Master
 
 class Example(Master):
